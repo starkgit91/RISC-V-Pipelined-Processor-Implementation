@@ -4,11 +4,12 @@ The target is one RV32IM_Zicsr_Zifencei processor, organized as five logical sec
 IF, ID/rename, EX/scheduling, MEM, and WB/commit. The approved revision is two-wide fetch,
 dispatch, issue, completion, and retirement. Instructions still commit in program order.
 
-**Current state: blocks 1 through 7 are implemented and tested at block level.** These include
+**Current state: blocks 1 through 8 are implemented and tested at block level.** These include
 shared definitions, decoder/ALU/comparator, four-read/two-write physical registers, two-wide
 renaming, a two-wide ROB/trace recorder, the two-issue scheduler, and real integer/multiply/divide
-execution paths. This is not yet a complete CPU. Completion arbitration, fetch, LSU, prediction,
-machine control, AXI, firmware, and Vivado integration remain.
+execution paths, plus production completion arbitration and accepted-value writeback. This is
+not yet a complete CPU. Fetch, LSU, prediction, machine control, AXI, firmware, and Vivado
+integration remain.
 
 ## Read the lessons in order
 
@@ -24,6 +25,7 @@ connections, signal roles, examples, and interview questions.
 | 5 | docs/block05_complete_guide.md | Dual completion, ordered retirement/traps, recovery lock, trace |
 | 6 | docs/block06_complete_guide.md | Oldest-ready two-port matching, accepted-result wakeup, recovery gating |
 | 7 | docs/block07_complete_guide.md | Independent execution, iterative RV32M, held results, cancellation |
+| 8 | docs/block08_complete_guide.md | Five sources, two retained buffers, accepted PRF writes/wakeup |
 
 The decoder is a reusable per-instruction module; the later front end will decode a pair.
 Both integer execution instances reuse the block-2 ALU. Multiply/divide runs in its separate
@@ -38,8 +40,8 @@ python3 scripts/run_checks.py --block all
 python3 scripts/build_guide.py
 ```
 
-Select one block with `--block 1` through `--block 7`. Add `--waves` for optional clocked VCDs
-under build/block03 through build/block07. No external Python packages are required.
+Select one block with `--block 1` through `--block 8`. Add `--waves` for optional clocked VCDs
+under build/block03 through build/block08. No external Python packages are required.
 The runner returns a nonzero status on compilation error, failed checks, or timeout.
 
 Each reports/blockNN_results.json identifies scope, test cases, counts, and exact source hashes.
@@ -55,12 +57,19 @@ Block 6 adds an independent scheduler test and a connected rename/ROB/PRF/IQ/tra
 ready younger instructions issue while an older instruction waits; an accepted producer result
 wakes that instruction with same-cycle PRF bypass. The scheduler is real RTL, but execution
 engines in that historical test are modeled. Block 7 connects real execution engines and uses a
-test-only completion selector; production completion arbitration remains block 8.
+test-only completion selector; block 8 implements the production completion path.
 
 Block 7's actual RTL demo issues DIV100/4 and ADD7+9 together at cycle 6. ADD completes at cycle 7,
 DIV at 39, and the dependent ADD captures 25+16 through bypass on that same cycle. DIV and ADD
 retire in order at cycle 40; the dependent result 41 retires at cycle 41. Separate tests cover
 RV32M arithmetic, branch/address faults, retained outputs, cancellation, and safe owner reuse.
+
+Block 8 uses production arbitration/writeback, with five held producer interfaces and two
+registered output slots. Three real completions are synchronized: older DIV and ALU 0 transfer
+first, while ALU 1 retains its packet. Source capture is separate from ROB acceptance; only
+accepted nonfaulting register results write/broadcast. Buffering changes the demonstration's
+completion latency: independent ADD completes at 9, DIV/RAW wakeup at 41; their retirements
+remain ordered at 42 and 44. Block 7's earlier timing belongs to its direct test selector.
 
 ## Vivado XSim on Linux
 

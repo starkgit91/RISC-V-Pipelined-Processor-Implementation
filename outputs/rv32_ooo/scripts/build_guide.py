@@ -42,6 +42,18 @@ BLOCKS = {
         ("Complete self-checking execution test", "tb/tb_block07.sv"),
         ("Complete connected out-of-order arithmetic test", "tb/tb_block07_integration.sv"),
     ],
+    "08": [
+        ("Complete five-source completion arbiter", "rtl/rv32_completion_arbiter.sv"),
+        ("Complete accepted-value writeback wrapper", "rtl/rv32_writeback.sv"),
+        ("Complete arbitration/writeback testbench", "tb/tb_block08.sv"),
+        ("Complete connected production-writeback test", "tb/tb_block08_integration.sv"),
+    ],
+    "09": [
+        ("Complete two-instruction fetch unit", "rtl/rv32_fetch.sv"),
+        ("Complete synchronous native instruction adapter", "rtl/rv32_instruction_adapter.sv"),
+        ("Complete fetch reference-model test", "tb/tb_block09.sv"),
+        ("Complete RAM-to-retirement integration test", "tb/tb_block09_integration.sv"),
+    ],
 }
 
 for number, sources in BLOCKS.items():

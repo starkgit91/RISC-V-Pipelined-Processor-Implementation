@@ -5,7 +5,7 @@ firmware, documentation, and the agreed verification/build deliverables.
 
 ## Current architecture decision
 
-The user selected two-issue after the architecture discussion. Blocks 1–7 now use the revised
+The user selected two-issue after the architecture discussion. Blocks 1–8 now use the revised
 interfaces for two-wide dispatch, issue, completion, and retirement; fetch remains a future
 block. The active register file has four read ports and two write ports; two-wide renaming and
 the ROB are tested as well.
@@ -25,7 +25,7 @@ chosen teaching example remains an older DIV and a younger ADD completing first.
 | 5 | Reorder buffer and retirement | Two-wide unit and connected control/storage tests pass |
 | 6 | Issue queue and oldest-ready scheduling | Two-issue unit and connected scheduling tests pass |
 | 7 | Independent integer and iterative multiply/divide execution | Unit and connected real-execution tests pass |
-| 8 | Completion arbitration and speculative writeback | Not implemented |
+| 8 | Completion arbitration and speculative writeback | Standalone and connected production-writeback tests pass |
 | 9 | Fetch unit and synchronous BRAM adapter | Not implemented |
 | 10 | BTB/PHT predictor | Not implemented |
 | 11 | Misprediction recovery and cancellation | Not implemented |
@@ -95,14 +95,31 @@ also tested. The connected completion selector is test-only; block 8 remains uni
 See reports/block07_results.json for source hashes and precise scope. Earlier source-hashed
 reports remain valid against the updated shared package after regression.
 
-## Block 8 learning checkpoint
+Block 8 now contains the production five-source/two-buffer completion arbiter and accepted-value
+writeback wrapper. Output lanes retain their payloads independently under backpressure. Input
+capture can overlap output consumption; ROB validation still precedes all PRF writes and
+readiness/wakeup. Cancellation clears the arbiter in addition to the execution units.
+52,221 standalone checks and 890 connected checks pass: 53,111 total. The connected test
+synchronizes three real completions, verifies two old-priority source captures and retained
+third output, and exercises stalls/cancellation/reuse. Synthetic stale-generation and wrong-pdst
+packets pass through real ROB rejection without physical or architectural effects. The production
+buffer adds a completion-stage cycle: real DIV/ADD issue7, ADD accepted9, DIV/dependent issue41,
+older pair retire42, dependent retire44. Source hashes are in reports/block08_results.json.
+All blocks 1–7 pass again with the updated shared package.
 
-The completion arbiter will receive independently held ALU-0, ALU-1, multiply/divide, and later
-memory/system results. It must select at most two per cycle, retain selection under downstream
-backpressure, consume rejected/stale owners safely, and send only ROB-accepted nonfaulting
-values to the PRF/readiness/wakeup paths. It will distinguish result consumption from valid
-speculative writeback and from separate architectural retirement.
+## Block 9 learning checkpoint
 
-Question before block 8 implementation: start with three units finishing together while only
-two writeback slots are available, or trace accepted versus stale completion ownership? Both
-are covered; the answer selects the leading example. No block 8 RTL is written yet.
+The next block will implement instruction fetching, synchronous native BRAM access, paired
+instruction delivery, buffering, and stale-response cancellation. It will supply valid PC,
+instruction, prediction, and fetch-fault records to decode/rename and obey front-end backpressure.
+The proposed instruction-memory interface reads 64 bits per aligned row so it can supply two
+32-bit instructions per cycle. Shared RAM keeps a 32-bit data port. AMD PG058 documents that
+IP Integrator does not support asymmetric BMG port widths, so the planned Vivado flow will
+generate the memory IP separately with Tcl and connect it to the block design through the
+FPGA wrapper. This keeps the selected two-wide fetch and shared-memory organization. The
+memory-generation/wrapper flow still needs actual Vivado validation in block 16.
+Reference: https://docs.amd.com/api/khub/documents/V70n09duEdKgzrX2d1W97g/content
+
+Before block 9 coding, choose the leading example: two instructions from a synchronous 64-bit
+BRAM read, or discarding an old fetch response after a redirect. Both will be covered. There
+is no block 9 RTL yet; implementation waits for the user's learning-checkpoint answer.

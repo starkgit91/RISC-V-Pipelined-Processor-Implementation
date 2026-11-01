@@ -119,6 +119,56 @@ BLOCKS = {
             ],
         }],
     },
+    "8": {
+        "top": "tb_block08",
+        "sources": [
+            "rtl/rv32_ooo_pkg.sv", "rtl/rv32_completion_arbiter.sv", "rtl/rv32_writeback.sv",
+            "tb/tb_block08.sv",
+        ],
+        "scope": "five-source/two-slot arbitration, retained outputs, accepted writeback, cancellation",
+        "not_verified": [
+            "memory/system execution engines", "complete recovery controller",
+            "fetch or prediction lookup/training", "CSR/interrupt architectural state",
+        ],
+        "extra_cases": [{
+            "top": "tb_block08_integration",
+            "summary": "BLOCK08_INTEGRATION",
+            "scope": "real execution with production completion arbitration and accepted writeback",
+            "sources": [
+                "rtl/rv32_ooo_pkg.sv", "rtl/rv32_alu.sv", "rtl/rv32_branch_compare.sv",
+                "rtl/rv32_rename.sv", "rtl/rv32_physical_regfile.sv",
+                "rtl/rv32_reorder_buffer.sv", "rtl/rv32_trace_recorder.sv",
+                "rtl/rv32_issue_queue.sv", "rtl/rv32_integer_execute.sv",
+                "rtl/rv32_muldiv_execute.sv", "rtl/rv32_execution_cluster.sv",
+                "rtl/rv32_completion_arbiter.sv", "rtl/rv32_writeback.sv",
+                "tb/tb_block08_integration.sv",
+            ],
+        }],
+    },
+    "9": {
+        "top": "tb_block09",
+        "sources": ["rtl/rv32_ooo_pkg.sv", "rtl/rv32_fetch.sv", "tb/tb_block09.sv"],
+        "scope": "paired fetch, response credits, prefix buffering, prediction metadata, stale reads",
+        "not_verified": [
+            "BTB/PHT hardware or training", "complete recovery controller",
+            "shared-port write collision detector", "AXI, memory instructions, CSRs, interrupts",
+        ],
+        "extra_cases": [{
+            "top": "tb_block09_integration",
+            "summary": "BLOCK09_INTEGRATION",
+            "scope": "synchronous instruction RAM through dual decode to actual OoO retirement",
+            "sources": [
+                "rtl/rv32_ooo_pkg.sv", "rtl/rv32_fetch.sv", "rtl/rv32_instruction_adapter.sv",
+                "rtl/rv32_decoder.sv", "rtl/rv32_alu.sv", "rtl/rv32_branch_compare.sv",
+                "rtl/rv32_rename.sv", "rtl/rv32_physical_regfile.sv",
+                "rtl/rv32_reorder_buffer.sv", "rtl/rv32_trace_recorder.sv",
+                "rtl/rv32_issue_queue.sv", "rtl/rv32_integer_execute.sv",
+                "rtl/rv32_muldiv_execute.sv", "rtl/rv32_execution_cluster.sv",
+                "rtl/rv32_completion_arbiter.sv", "rtl/rv32_writeback.sv",
+                "tb/tb_block09_integration.sv",
+            ],
+        }],
+    },
 }
 
 
@@ -143,7 +193,7 @@ def run_block(block, simulator_version, waves=False):
                  str(build / (case["top"] + ".vvp")), *case["sources"]],
                 ["vvp", str(build / (case["top"] + ".vvp"))],
             ]
-            if waves and block in {"3", "4", "5", "6", "7"}:
+            if waves and block in {"3", "4", "5", "6", "7", "8", "9"}:
                 commands[-1].append("+waves")
             for command in commands:
                 result = subprocess.run(command, cwd=ROOT, text=True, capture_output=True, timeout=30)

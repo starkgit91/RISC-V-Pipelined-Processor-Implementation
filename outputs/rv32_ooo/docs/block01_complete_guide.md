@@ -27,6 +27,10 @@ valid/ready signals indicate when a record is meaningful and when it transfers.
 
 ## 2. Configuration and hardware dimensions
 
+Five held completion sources (two integer, multiply/divide, later memory, later system) now
+share two registered writeback slots. Their packed completion_sources_t bundle uses independent
+valid/ready bits and does not change dispatch/retirement width.
+
 The active configuration is two-wide: fetch, dispatch, issue, completion, and retirement each
 support up to two instructions/results per cycle. Named lane0/lane1 packed pairs preserve
 per-instruction fields; lane 0 is older for dispatch and retirement. The execution-packet pair
@@ -285,6 +289,7 @@ package rv32_ooo_pkg;
   localparam int ISSUE_WIDTH      = 2;
   localparam int WRITEBACK_WIDTH  = 2;
   localparam int RETIRE_WIDTH     = 2;
+  localparam int COMPLETION_SOURCE_COUNT = 5;
   localparam int XLEN             = 32;
   localparam int ARCH_REG_COUNT   = 32;
   localparam int PHYS_REG_COUNT   = 64;
@@ -558,6 +563,16 @@ package rv32_ooo_pkg;
     completion_t lane1;
     completion_t lane0;
   } completion_pair_t;
+
+  // Five held producer channels feed two registered arbitration slots.
+  // Source indices 0..4 follow this packed record from low to high bits.
+  typedef struct packed {
+    completion_t system_result;
+    completion_t memory_result;
+    completion_t muldiv_result;
+    completion_t alu1_result;
+    completion_t alu0_result;
+  } completion_sources_t;
 
   // ROB storage keeps the original uop for precise PC, rename, and system state.
   // exception is the current fault state; initialize it from uop.decoded.fetch.exception.

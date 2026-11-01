@@ -27,6 +27,10 @@ valid/ready signals indicate when a record is meaningful and when it transfers.
 
 ## 2. Configuration and hardware dimensions
 
+Five held completion sources (two integer, multiply/divide, later memory, later system) now
+share two registered writeback slots. Their packed completion_sources_t bundle uses independent
+valid/ready bits and does not change dispatch/retirement width.
+
 The active configuration is two-wide: fetch, dispatch, issue, completion, and retirement each
 support up to two instructions/results per cycle. Named lane0/lane1 packed pairs preserve
 per-instruction fields; lane 0 is older for dispatch and retirement. The execution-packet pair
