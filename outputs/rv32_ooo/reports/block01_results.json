@@ -1,0 +1,27 @@
+{
+  "block": 1,
+  "status": "passed",
+  "architecture_target": "two_issue_RV32IM_Zicsr_Zifencei",
+  "scope": "configuration constants and packed instruction/queue record contracts",
+  "checks": 130,
+  "failures": 0,
+  "cases": [
+    {
+      "top": "tb_block01",
+      "scope": "configuration constants and packed instruction/queue record contracts",
+      "checks": 130,
+      "failures": 0
+    }
+  ],
+  "simulator": "Icarus Verilog version 13.0 (stable) (v13_0)",
+  "sources_sha256": {
+    "rtl/rv32_ooo_pkg.sv": "e1724dc503bb339d55355dbfddcdaf99cda6b14c736f33a7bf22462ead0d3a91",
+    "tb/tb_block01.sv": "36357daf24bd0cb9ee52bd67abd78a344f8a69da450c73ce741dd14e2319d583"
+  },
+  "not_verified": [
+    "instruction decoding or execution",
+    "renaming or scheduling",
+    "complete processor, AXI, interrupts, or firmware",
+    "Vivado synthesis, implementation, or bitstream generation"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "block": 3,
+  "status": "passed",
+  "scope": "clocked physical register storage, two reads, x0 protection, completion bypass",
+  "checks": 21339,
+  "failures": 0,
+  "simulator": "Icarus Verilog version 13.0 (stable) (v13_0)",
+  "sources_sha256": {
+    "rtl/rv32_ooo_pkg.sv": "0f8ba77722dd5bfd0d626f40c2119b90668b04a5ff32d1a1fab2cb2b45fd14a5",
+    "rtl/rv32_physical_regfile.sv": "2349974f2086e4cac3948d7ca53303d11196bfadf61c40cb50a9ad642f3bce2a",
+    "tb/tb_block03.sv": "74ac2474e564b84b72efb6c9956a69087a285734c753852883f9d587a5be2f7d"
+  },
+  "not_verified": [
+    "rename allocation or readiness tracking",
+    "ROB tag validation or completion arbitration",
+    "committed register maps or retirement",
+    "FPGA resource mapping or timing",
+    "complete processor, AXI, interrupts, or firmware",
+    "Vivado synthesis, implementation, or bitstream generation"
+  ]
+}

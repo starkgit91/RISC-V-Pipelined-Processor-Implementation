@@ -1,0 +1,21 @@
+{
+  "block": 4,
+  "status": "passed",
+  "scope": "rename maps, physical allocation, readiness, retirement updates, recovery apply",
+  "checks": 169591,
+  "failures": 0,
+  "simulator": "Icarus Verilog version 13.0 (stable) (v13_0)",
+  "sources_sha256": {
+    "rtl/rv32_ooo_pkg.sv": "0f8ba77722dd5bfd0d626f40c2119b90668b04a5ff32d1a1fab2cb2b45fd14a5",
+    "rtl/rv32_rename.sv": "bde4d4878f832a30e5c7b9efa71f484624be8a7d312e63219a2e1e72a62f5ab4",
+    "tb/tb_block04.sv": "e443adaa3bec11ff4547aa2acee69826257c9dd6092712670651896fbec47b05"
+  },
+  "not_verified": [
+    "ROB controller and issue scheduling",
+    "completion ownership validation",
+    "execution cancellation or recovery quiescence detection",
+    "physical result values or complete processor execution",
+    "complete processor, AXI, interrupts, or firmware",
+    "Vivado synthesis, implementation, or bitstream generation"
+  ]
+}

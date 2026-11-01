@@ -1,0 +1,18 @@
+{
+  "block": 1,
+  "status": "passed",
+  "scope": "configuration constants and packed instruction/queue record contracts",
+  "checks": 126,
+  "failures": 0,
+  "simulator": "Icarus Verilog version 13.0 (stable) (v13_0)",
+  "sources_sha256": {
+    "rtl/rv32_ooo_pkg.sv": "0f8ba77722dd5bfd0d626f40c2119b90668b04a5ff32d1a1fab2cb2b45fd14a5",
+    "tb/tb_block01.sv": "633f16a3feccb8590b965eaca5ee09b0bb484345bf7fac8498999cab6b6fb359"
+  },
+  "not_verified": [
+    "instruction decoding or execution",
+    "renaming or scheduling",
+    "complete processor, AXI, interrupts, or firmware",
+    "Vivado synthesis, implementation, or bitstream generation"
+  ]
+}

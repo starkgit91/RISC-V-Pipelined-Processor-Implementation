@@ -1,0 +1,38 @@
+PASS demo x1                                       value=0000000a
+PASS demo x2                                       value=00000005
+PASS demo x3                                       value=00000005
+PASS demo x4                                       value=00000005
+PASS demo x5 flushed                               value=00000000
+PASS demo x6 branch target                         value=00000064
+PASS demo stored word                              value=00000005
+PASS demo load-use stalls                          value=00000001
+PASS demo taken branches                           value=00000001
+FAIL flush_id is driven                            got=00000000 expected=00000001
+PASS consecutive dependent ADDI                    value=0000000c
+PASS newest MEM forwarding has priority            value=00000018
+FAIL WB/ID same-edge RAW                           got=00000001 expected=00000008
+FAIL WB/ID same-edge store data                    got=00000000 expected=00000007
+FAIL WB/ID same-edge BEQ must not take             got=00000000 expected=00000001
+PASS adjacent load-use result                      value=0000002a
+PASS adjacent load-use one stall                   value=00000001
+FAIL ADDI immediate bits must not be rs2           got=00000001 expected=00000000
+PASS false-stall ADDI result                       value=00000001
+FAIL load to x0 must not cause RAW stall           got=00000001 expected=00000000
+PASS x0 remains zero                               value=00000000
+FAIL BNE must skip next instruction                got=00000063 expected=00000000
+FAIL JAL link value                                got=00000000 expected=00000004
+FAIL JAL redirect                                  got=00000063 expected=00000000
+FAIL AND                                           got=00000004 expected=00000001
+FAIL SLL                                           got=00000004 expected=00000006
+FAIL SLT                                           got=00000004 expected=00000000
+FAIL MUL                                           got=00000004 expected=00000003
+FAIL DIV                                           got=00000004 expected=00000003
+FAIL ANDI                                          got=00000004 expected=00000001
+FAIL LB sign extension                             got=12345680 expected=ffffff80
+FAIL LBU zero extension                            got=12345680 expected=00000080
+FAIL SB preserves other bytes                      got=0000007f expected=1234567f
+PASS taken BEQ flushes wrong-path store            value=abcdef01
+PASS taken BEQ flushes wrong-path reg write        value=00000000
+PASS negative ADDI immediate                       value=fffffffd
+AUDIT SUMMARY: 36 checks, 18 pass, 18 fail
+work/rtl_audit_tb.sv:187: $finish called at 2136000 (1ps)

@@ -1,0 +1,3 @@
+VCD info: dumpfile build/block06/block06.vcd opened for output.
+BLOCK06 SUMMARY: 34054 checks, 0 failures
+/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/tb/tb_block06.sv:709: $finish called at 7633000 (1ps)
