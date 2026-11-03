@@ -205,10 +205,11 @@ For the ADD example, the measured block-level path is:
 3. Supply example source values 12 and 7 through testbench operand selection.
 4. Observe result 19 from the ALU.
 
-There is no register write or retirement in this test. Actual multicycle instruction traces
-will be added when the scheduler, execution buffers, physical registers, and ROB exist.
+There is no register write or retirement in this isolated test. Blocks 7–15 add actual
+multicycle instruction traces through the scheduler, execution buffers, physical registers,
+and ROB; block 15 tests the assembled core.
 
-Run `python3 scripts/run_checks.py --block 2`, or `--block all` for both implemented blocks.
+Run `python3 scripts/run_checks.py --block 2`, or `--block all` for all 15 regression groups.
 The self-checking testbench covers all 1,024 R-type funct7/funct3 combinations, all RV32 shift
 upper-field combinations, every signed 12-bit I/S immediate, B/J boundary offsets, load/store
 widths, CSR/system/fence forms, source-use behavior, ALU edge/random cases, all shift counts

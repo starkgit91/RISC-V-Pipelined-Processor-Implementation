@@ -1,0 +1,35 @@
+{
+  "status": "passed_with_one_user_approved_layout_gap",
+  "checked_utc": "2026-11-03T07:26:17.004579+00:00",
+  "upstream_revision": "2dc36dd2f3d25383039effa10f1a3930a78a945a",
+  "scope": "ACT4-derived RV32 I/M/Zicsr/Zifencei self-checking programs on production core; privileged suites excluded",
+  "original_programs": 54,
+  "regenerated_programs": 136,
+  "built_final_elfs": 135,
+  "executed_programs": 135,
+  "passed": 135,
+  "failed": 0,
+  "timeout": 0,
+  "conversion_failed": 0,
+  "gap": {
+    "program": "rv32i/I/I-jal-00.S",
+    "reason": "cumulative alignment creates image ending at 0x279c0; fixed RAM ends at 0x10000",
+    "individual_test_offsets": "within +/-8192; gap is cumulative layout, not inherent JAL range",
+    "user_decision": "retain 64 KiB and document this test gap",
+    "counted_as_pass": false
+  },
+  "full_privileged_act4_campaign": "not_run; separate directed trap/IRQ tests are in block15_results.json",
+  "certification_claim": false,
+  "configuration_and_elf_manifest": "verification/act4/manifest.json",
+  "generation_preservation_manifest": "verification/act4/generation_manifest.json",
+  "execution_report": "reports/act4_execution_results.json",
+  "per_case_logs": "reports/act4_execution",
+  "build_log": "reports/act4_small_build.log",
+  "adaptations": [
+    "128-testcase soft file limit using upstream chunk splitter; all original chunks/labels/operands retained in generated inventory",
+    "three copied alignment-only rvc directives changed to norvc for no-C platform",
+    "three file-prefix pointer initializations repaired; instruction chunks/self-checks unchanged"
+  ],
+  "elf_manifest_sha256": "b300792298b89c44d621d48bb6a91a05d21f58068dfd2c384e9339999cf049d4",
+  "core_rtl_unchanged_during_act4_campaign": true
+}

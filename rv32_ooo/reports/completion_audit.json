@@ -1,0 +1,1025 @@
+{
+  "schema_version": 1,
+  "audited_utc": "2026-11-03T14:53:35.441486+00:00",
+  "scope": "Independent requirement-to-artifact/evidence audit of the accepted two-issue processor delivery; no RTL changes and no certification claim.",
+  "status": "accepted_scope_complete_with_documented_limits",
+  "certification_claim": false,
+  "advance_verification_guarantee": false,
+  "accepted_scope_changes": [
+    "Two-issue supersedes single-issue configuration and width-specific earlier records.",
+    "Five logical OoO sections supersede the original simple fixed in-order pipeline.",
+    "Firmware and FPGA/IP integration/bitstream work removed; retain selected Vivado/part/clock specifications.",
+    "User waived per-block checkpoint waits and extended the original time limit for full-core verification.",
+    "User chose fixed 64 KiB and explicitly accepted unexecuted I-jal-00 layout coverage gap."
+  ],
+  "method": [
+    "Read active RTL, actual testbenches, guides, source lists and recorded test logs.",
+    "Recomputed every recorded local source hash and final ACT4 compiled-source/input/delivered-log hash against current files.",
+    "Checked exact final ELF manifest set, generated-source hashes and copied-environment adaptation hashes.",
+    "Compared complete-guide code blocks byte-for-byte with actual sources and explanation prefixes.",
+    "Audit checks evidence consistency; it does not rerun all 755125 observations or claim new coverage."
+  ],
+  "mechanical_checks": {
+    "all_15_reports_present": true,
+    "all_local_groups_pass": true,
+    "total_local_checks": 755125,
+    "all_local_source_hashes_current": true,
+    "active_rtl_source_files": 24,
+    "module_definitions": 23,
+    "package_definitions": 1,
+    "compiler_list_exact_unique_package_first": true,
+    "complete_guides": 15,
+    "all_active_rtl_in_guides": true,
+    "all_code_listings_verbatim": true,
+    "guide_code_failures": [],
+    "guide_explanation_prefixes_current": true,
+    "act4_final_counts": {
+      "passed": 135,
+      "failed": 0,
+      "conversion_failed": 0,
+      "timeout": 0,
+      "total": 135
+    },
+    "act4_final_status": "all_input_programs_reported_pass",
+    "act4_manifest_exact_elf_set_and_hashes": true,
+    "act4_config_hashes_current": true,
+    "act4_generated_test_sources": 136,
+    "act4_generated_test_source_hashes_current": true,
+    "act4_copied_environment_patch_hashes_current": true,
+    "act4_final_compiled_source_hashes_current": true,
+    "act4_case_input_hashes_current": true,
+    "act4_delivered_simulation_logs_count": 135,
+    "act4_delivered_simulation_log_hashes_match": true,
+    "fresh_copy_waveform_run_exit": 0,
+    "fresh_copy_waveform_run_checks": 29474,
+    "fresh_copy_waveform_source_hashes_current": true,
+    "fresh_copy_waveform_runner_hash_current": true,
+    "fresh_copy_waveform_files_recorded": {
+      "build/core_axi/core_axi.vcd": {
+        "bytes": 4947971
+      },
+      "build/block15/block15.vcd": {
+        "bytes": 73595785
+      },
+      "build/core_traps/core_traps.vcd": {
+        "bytes": 27693648
+      }
+    },
+    "elaboration_command_exact_active_rtl_set_package_first": true,
+    "act4_compile_exact_active_rtl_and_harness_package_first": true
+  },
+  "local_regression_groups": [
+    {
+      "block": 1,
+      "checks": 130,
+      "failures": 0,
+      "status": "passed",
+      "report": "reports/block01_results.json",
+      "report_sha256": "93a10248879fe53394d571dfd9cbd06aa974c9c22276ed3acbcadf98bc62502a",
+      "source_hashes_match": true,
+      "case_scopes": [
+        {
+          "top": "tb_block01",
+          "scope": "configuration constants and packed instruction/queue record contracts",
+          "checks": 130,
+          "failures": 0
+        }
+      ]
+    },
+    {
+      "block": 2,
+      "checks": 22708,
+      "failures": 0,
+      "status": "passed",
+      "report": "reports/block02_results.json",
+      "report_sha256": "d5f17f7a6f7f3559a6f171f65f6bdbbf2d2940d8ef1a48f50e06eb09f1a93cdb",
+      "source_hashes_match": true,
+      "case_scopes": [
+        {
+          "top": "tb_block02",
+          "scope": "instruction decode, immediate construction, integer ALU, and branch conditions",
+          "checks": 22708,
+          "failures": 0
+        }
+      ]
+    },
+    {
+      "block": 3,
+      "checks": 155389,
+      "failures": 0,
+      "status": "passed",
+      "report": "reports/block03_results.json",
+      "report_sha256": "f6e23d909ac98389acd34a1f794e837c93c98116ef7ecc7cc089e04b38a26d94",
+      "source_hashes_match": true,
+      "case_scopes": [
+        {
+          "top": "tb_block03",
+          "scope": "four PRF reads, two writes, p0 protection, dual completion bypass",
+          "checks": 155389,
+          "failures": 0
+        }
+      ]
+    },
+    {
+      "block": 4,
+      "checks": 155233,
+      "failures": 0,
+      "status": "passed",
+      "report": "reports/block04_results.json",
+      "report_sha256": "ec7e1ec283eab6cf0ed634d1e101ff0ca4745a027e1ac3b98f1de235cc2af284",
+      "source_hashes_match": true,
+      "case_scopes": [
+        {
+          "top": "tb_block04",
+          "scope": "two-wide rename, intra-pair dependencies, dual completion/retirement, recovery",
+          "checks": 155233,
+          "failures": 0
+        }
+      ]
+    },
+    {
+      "block": 5,
+      "checks": 18611,
+      "failures": 0,
+      "status": "passed",
+      "report": "reports/block05_results.json",
+      "report_sha256": "0dd99bdf1175263e8943df98c361f850bfb2844ee64f92dde0b3d160ae6e2ac6",
+      "source_hashes_match": true,
+      "case_scopes": [
+        {
+          "top": "tb_block05",
+          "scope": "two-wide ROB ownership, ordered retirement/traps, recovery lock, registered trace",
+          "checks": 18573,
+          "failures": 0
+        },
+        {
+          "top": "tb_block05_integration",
+          "scope": "connected rename/ROB/PRF/trace handshakes with injected completion values",
+          "checks": 38,
+          "failures": 0
+        }
+      ]
+    },
+    {
+      "block": 6,
+      "checks": 34097,
+      "failures": 0,
+      "status": "passed",
+      "report": "reports/block06_results.json",
+      "report_sha256": "3cb82df0aac8054a95509e5dafc9f77eddc8598a3dca09f04527feb682164e31",
+      "source_hashes_match": true,
+      "case_scopes": [
+        {
+          "top": "tb_block06",
+          "scope": "two-issue oldest-ready matching, source wakeup, resource and recovery gating",
+          "checks": 34054,
+          "failures": 0
+        },
+        {
+          "top": "tb_block06_integration",
+          "scope": "connected rename/ROB/PRF/IQ with modeled execution and injected completion",
+          "checks": 43,
+          "failures": 0
+        }
+      ]
+    },
+    {
+      "block": 7,
+      "checks": 121718,
+      "failures": 0,
+      "status": "passed",
+      "report": "reports/block07_results.json",
+      "report_sha256": "42e500b5e28f8ad41dcb7f0a853ef186025132ab646079178232e0376ed81ab2",
+      "source_hashes_match": true,
+      "case_scopes": [
+        {
+          "top": "tb_block07",
+          "scope": "integer/control/address execution, iterative RV32M, retained results, cancellation",
+          "checks": 121060,
+          "failures": 0
+        },
+        {
+          "top": "tb_block07_integration",
+          "scope": "actual OoO arithmetic with connected rename/ROB/PRF/IQ/execution/trace",
+          "checks": 658,
+          "failures": 0
+        }
+      ]
+    },
+    {
+      "block": 8,
+      "checks": 53111,
+      "failures": 0,
+      "status": "passed",
+      "report": "reports/block08_results.json",
+      "report_sha256": "56e994b00a38c51a6a15f144d03c3ffe5913e283a50439150b612e4194059f30",
+      "source_hashes_match": true,
+      "case_scopes": [
+        {
+          "top": "tb_block08",
+          "scope": "five-source/two-slot arbitration, retained outputs, accepted writeback, cancellation",
+          "checks": 52221,
+          "failures": 0
+        },
+        {
+          "top": "tb_block08_integration",
+          "scope": "real execution with production completion arbitration and accepted writeback",
+          "checks": 890,
+          "failures": 0
+        }
+      ]
+    },
+    {
+      "block": 9,
+      "checks": 66609,
+      "failures": 0,
+      "status": "passed",
+      "report": "reports/block09_results.json",
+      "report_sha256": "0f25dce603bc7bc600896e19316554e387015110ac7d85456baa43a159547282",
+      "source_hashes_match": true,
+      "case_scopes": [
+        {
+          "top": "tb_block09",
+          "scope": "paired fetch, response credits, prefix buffering, prediction metadata, stale reads",
+          "checks": 37319,
+          "failures": 0
+        },
+        {
+          "top": "tb_block09_integration",
+          "scope": "synchronous instruction RAM through dual decode to actual OoO retirement",
+          "checks": 505,
+          "failures": 0
+        },
+        {
+          "top": "tb_block09_adapter",
+          "scope": "native synchronous row reads, held responses, range/alignment faults, block/drain",
+          "checks": 28785,
+          "failures": 0
+        }
+      ]
+    },
+    {
+      "block": 10,
+      "checks": 75980,
+      "failures": 0,
+      "status": "passed",
+      "report": "reports/block10_results.json",
+      "report_sha256": "f260eb8173b76014b98b9a74aaa62aeb442bd2ff7844fa1544064ffa671cea03",
+      "source_hashes_match": true,
+      "case_scopes": [
+        {
+          "top": "tb_block10",
+          "scope": "two-query BTB/PHT and ordered retirement training",
+          "checks": 75009,
+          "failures": 0
+        },
+        {
+          "top": "tb_block10_integration",
+          "scope": "actual loop trace equivalence with test-only recovery sequencing",
+          "checks": 971,
+          "failures": 0
+        }
+      ]
+    },
+    {
+      "block": 11,
+      "checks": 19625,
+      "failures": 0,
+      "status": "passed",
+      "report": "reports/block11_results.json",
+      "report_sha256": "92f6c0750aecf84e74fc107e64029de566db3be84fbf4483bf10925e88002443",
+      "source_hashes_match": true,
+      "case_scopes": [
+        {
+          "top": "tb_block11",
+          "scope": "production cancellation acknowledgment/quiescence barrier and safe apply sequencing",
+          "checks": 19625,
+          "failures": 0
+        }
+      ]
+    },
+    {
+      "block": 12,
+      "checks": 1067,
+      "failures": 0,
+      "status": "passed",
+      "report": "reports/block12_results.json",
+      "report_sha256": "83abc527cfe5bcfb8f53c9641236459305c2c00ca65f4c6fd4e250f21ba8c201",
+      "source_hashes_match": true,
+      "case_scopes": [
+        {
+          "top": "tb_block12",
+          "scope": "ordered memory queue and load/store request/response handling",
+          "checks": 1067,
+          "failures": 0
+        }
+      ]
+    },
+    {
+      "block": 13,
+      "checks": 511,
+      "failures": 0,
+      "status": "passed",
+      "report": "reports/block13_results.json",
+      "report_sha256": "3e0de26805047e042508f0985f5fcf26f862a1ccf327ad747dfa2d39e47cf096",
+      "source_hashes_match": true,
+      "case_scopes": [
+        {
+          "top": "tb_block13",
+          "scope": "serialized CSR commit, machine traps, interrupt eligibility and WFI",
+          "checks": 511,
+          "failures": 0
+        }
+      ]
+    },
+    {
+      "block": 14,
+      "checks": 862,
+      "failures": 0,
+      "status": "passed",
+      "report": "reports/block14_results.json",
+      "report_sha256": "86e9f2217376be71313143ff90acb2af654141ca419d6072d7e8c344a3fbb5c2",
+      "source_hashes_match": true,
+      "case_scopes": [
+        {
+          "top": "tb_block14",
+          "scope": "AXI-Lite master channels and machine timer/software interrupt slave",
+          "checks": 862,
+          "failures": 0
+        }
+      ]
+    },
+    {
+      "block": 15,
+      "checks": 29474,
+      "failures": 0,
+      "status": "passed",
+      "report": "reports/block15_results.json",
+      "report_sha256": "894cff3e5413dad847995cbd1cbd2bdf56486407fc01d6026db0188cb9784802",
+      "source_hashes_match": true,
+      "case_scopes": [
+        {
+          "top": "tb_block15",
+          "scope": "RAM-fed production core against independent instruction/architectural memory reference",
+          "checks": 20515,
+          "failures": 0
+        },
+        {
+          "top": "tb_core_traps",
+          "scope": "precise faults, IRQ drain/return, WFI and recovery priority",
+          "checks": 7677,
+          "failures": 0
+        },
+        {
+          "top": "tb_core_axi",
+          "scope": "actual core AXI memory, bus faults, FENCE.I and timer interrupts",
+          "checks": 1282,
+          "failures": 0
+        }
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "id": "R01",
+      "accepted_requirement": "One custom two-issue RV32IM_Zicsr_Zifencei out-of-order core; M-mode only.",
+      "status": "implemented_and_tested",
+      "actual_result": "Production core composes all active architectural blocks. Fetch/dispatch/issue/completion/retirement limits are 2; 32 architectural and 64 physical registers.",
+      "implementation": [
+        "rtl/rv32_ooo_pkg.sv",
+        "rtl/rv32_ooo_core.sv"
+      ],
+      "evidence": [
+        "reports/block01_results.json",
+        "reports/block15_results.json"
+      ],
+      "limits": ""
+    },
+    {
+      "id": "R02",
+      "accepted_requirement": "Five logical IF/ID/EX/MEM/WB sections carrying complete valid instruction ownership.",
+      "status": "implemented_and_tested",
+      "actual_result": "Fetch/FIFO, decode/rename, IQ/execution, ordered LSU, completion/ROB retirement are explicit clocked sections and queues.",
+      "implementation": [
+        "rtl/rv32_fetch.sv",
+        "rtl/rv32_rename.sv",
+        "rtl/rv32_issue_queue.sv",
+        "rtl/rv32_load_store_unit.sv",
+        "rtl/rv32_writeback.sv",
+        "rtl/rv32_reorder_buffer.sv"
+      ],
+      "evidence": [
+        "docs/block15_complete_guide.md",
+        "reports/block15_results.json"
+      ],
+      "limits": "The accepted OoO plan supersedes a fixed four-register IF/ID-ID/EX-EX/MEM-MEM/WB in-order chain. Five sections do not imply five-clock latency or CPI=1."
+    },
+    {
+      "id": "R03",
+      "accepted_requirement": "Base RV32I arithmetic, shifts, logic, comparisons, upper immediates, all six branches, JAL/JALR, and byte/halfword/word memory operations.",
+      "status": "implemented_and_tested",
+      "actual_result": "Decoder and datapaths implement the selected instruction families; full-core encoded programs and ACT4-derived ELFs execute on the actual core.",
+      "implementation": [
+        "rtl/rv32_decoder.sv",
+        "rtl/rv32_alu.sv",
+        "rtl/rv32_branch_compare.sv",
+        "rtl/rv32_integer_execute.sv",
+        "rtl/rv32_load_store_unit.sv"
+      ],
+      "evidence": [
+        "reports/block02_results.json",
+        "reports/block07_results.json",
+        "reports/block15_results.json",
+        "reports/act4_execution_results.json"
+      ],
+      "limits": "One generated JAL layout program is unexecuted under the accepted 64 KiB decision; directed JAL/JALR tests pass."
+    },
+    {
+      "id": "R04",
+      "accepted_requirement": "All eight RV32M multiply/divide/remainder operations with an iterative independent execution resource.",
+      "status": "implemented_and_tested",
+      "actual_result": "MUL/MULH/MULHSU/MULHU/DIV/DIVU/REM/REMU cover signedness, divide by zero, overflow, retained completion, cancellation and overlap with integer execution.",
+      "implementation": [
+        "rtl/rv32_muldiv_execute.sv",
+        "rtl/rv32_execution_cluster.sv"
+      ],
+      "evidence": [
+        "reports/block07_results.json",
+        "reports/block15_results.json",
+        "reports/act4_execution_results.json"
+      ],
+      "limits": ""
+    },
+    {
+      "id": "R05",
+      "accepted_requirement": "Six Zicsr forms, FENCE/FENCE.I, ECALL, EBREAK, MRET and WFI.",
+      "status": "implemented_and_tested",
+      "actual_result": "System operations decode, issue only at the serialized head boundary, retain intent until retirement, and perform the documented restart/trap/wait effects.",
+      "implementation": [
+        "rtl/rv32_decoder.sv",
+        "rtl/rv32_csr_file.sv",
+        "rtl/rv32_ooo_core.sv"
+      ],
+      "evidence": [
+        "reports/block02_results.json",
+        "reports/block13_results.json",
+        "reports/block15_results.json",
+        "reports/act4_execution_results.json"
+      ],
+      "limits": ""
+    },
+    {
+      "id": "R06",
+      "accepted_requirement": "Explain original SUBI/BEQZ/BNEQZ/JMP/LOOP/if-else and LD/SD names within the selected ISA.",
+      "status": "documented_isa_scope",
+      "actual_result": "Instruction/hazard guide maps aliases and software control structures to base instructions; RV64 LD/SD are explicitly absent from this RV32 core.",
+      "implementation": [
+        "docs/isa_and_hazards.md",
+        "rtl/rv32_decoder.sv"
+      ],
+      "evidence": [
+        "reports/block02_results.json",
+        "reports/block15_results.json"
+      ],
+      "limits": "There is no custom LOOP/if-else opcode, no MIPS32 encoding, and no RV64 doubleword load/store promise."
+    },
+    {
+      "id": "R07",
+      "accepted_requirement": "Physical register file with four reads, two writes, p0 constant, and same-cycle accepted completion bypass.",
+      "status": "implemented_and_tested",
+      "actual_result": "63 stored 32-bit words plus constant p0; matching accepted completion values bypass each read port; duplicate nonzero writes are diagnosed.",
+      "implementation": [
+        "rtl/rv32_physical_regfile.sv",
+        "rtl/rv32_writeback.sv"
+      ],
+      "evidence": [
+        "reports/block03_results.json",
+        "reports/block08_results.json",
+        "reports/block15_results.json"
+      ],
+      "limits": ""
+    },
+    {
+      "id": "R08",
+      "accepted_requirement": "Speculative/committed rename maps, free allocation, readiness, atomic resources and correct same-group dependencies.",
+      "status": "implemented_and_tested",
+      "actual_result": "Dual rename captures source mappings before destination replacement, forwards lane-0 mappings to lane 1, allocates distinct destinations, updates committed mappings in retirement order, and restores them on recovery.",
+      "implementation": [
+        "rtl/rv32_rename.sv",
+        "rtl/rv32_ooo_core.sv"
+      ],
+      "evidence": [
+        "reports/block04_results.json",
+        "reports/block05_results.json",
+        "reports/block15_results.json"
+      ],
+      "limits": ""
+    },
+    {
+      "id": "R09",
+      "accepted_requirement": "Handle RAW, WAR, WAW and structural hazards with explicit stalls/forwarding/renaming.",
+      "status": "implemented_and_tested",
+      "actual_result": "Physical tags preserve RAW dependencies; readiness/wakeup and PRF bypass supply results. New physical versions remove WAR/WAW false dependencies. Atomic dispatch and execution/completion availability impose structural backpressure.",
+      "implementation": [
+        "rtl/rv32_rename.sv",
+        "rtl/rv32_issue_queue.sv",
+        "rtl/rv32_completion_arbiter.sv"
+      ],
+      "evidence": [
+        "reports/block04_results.json",
+        "reports/block06_results.json",
+        "reports/block08_results.json",
+        "reports/block15_results.json"
+      ],
+      "limits": "Classical EX/MEM/MEM/WB in-order bypass selectors are replaced by the accepted OoO tag/completion architecture."
+    },
+    {
+      "id": "R10",
+      "accepted_requirement": "Eight-entry oldest-ready two-issue scheduling with execution-resource matching and continued integer work during DIV.",
+      "status": "implemented_and_tested",
+      "actual_result": "Age-relative selection finds the oldest eligible instruction plus an eligible partner; port 0 supports control/address/system and port 1 supports integer/muldiv. Busy DIV does not block available integer execution.",
+      "implementation": [
+        "rtl/rv32_issue_queue.sv",
+        "rtl/rv32_execution_cluster.sv"
+      ],
+      "evidence": [
+        "reports/block06_results.json",
+        "reports/block07_results.json",
+        "reports/block15_results.json"
+      ],
+      "limits": ""
+    },
+    {
+      "id": "R11",
+      "accepted_requirement": "Five simultaneous completion producers arbitrate to two retained writeback ports without result loss.",
+      "status": "implemented_and_tested",
+      "actual_result": "Two ALUs, mul/div, LSU and system results hold ownership/payload; buffers arbitrate by age, apply backpressure and broadcast only ROB-accepted nonfaulting register results.",
+      "implementation": [
+        "rtl/rv32_completion_arbiter.sv",
+        "rtl/rv32_writeback.sv"
+      ],
+      "evidence": [
+        "reports/block08_results.json",
+        "reports/block15_results.json"
+      ],
+      "limits": ""
+    },
+    {
+      "id": "R12",
+      "accepted_requirement": "16-entry ROB: completion may be out of order, architectural retirement up to two in program order.",
+      "status": "implemented_and_tested",
+      "actual_result": "Full index/generation/destination/write-intent checks reject stale or duplicate results. Completed younger instructions cannot retire past an incomplete/faulting older head.",
+      "implementation": [
+        "rtl/rv32_reorder_buffer.sv",
+        "rtl/rv32_trace_recorder.sv"
+      ],
+      "evidence": [
+        "reports/block05_results.json",
+        "reports/block15_results.json"
+      ],
+      "limits": ""
+    },
+    {
+      "id": "R13",
+      "accepted_requirement": "Demonstrate actual out-of-order behavior and an independent architectural reference.",
+      "status": "implemented_and_tested",
+      "actual_result": "Recorded connected execution: DIV and independent ADD issue at cycle 6; ADD completes at 7, DIV at 39, dependent issue at 39, results 25/16/41. Full-core memory-fed programs use an independently written instruction/register/memory reference and ordered event comparisons.",
+      "implementation": [
+        "tb/tb_block07_integration.sv",
+        "tb/tb_block15.sv",
+        "tb/tb_core_traps.sv"
+      ],
+      "evidence": [
+        "reports/block07_simulation.log",
+        "reports/block15_results.json",
+        "reports/block15_simulation.log"
+      ],
+      "limits": "The local reference is custom project verification, not an independent certification authority or exhaustive equivalence proof."
+    },
+    {
+      "id": "R14",
+      "accepted_requirement": "Synchronous 64-bit instruction fetch, two instruction words, buffering, stalls and stale-response cancellation.",
+      "status": "implemented_and_tested",
+      "actual_result": "One-outstanding row interface, four-instruction FIFO, reserved response credits, prediction snapshots, partial prefix compaction, access-error tokens and stale-response discard are implemented.",
+      "implementation": [
+        "rtl/rv32_fetch.sv",
+        "rtl/rv32_instruction_adapter.sv"
+      ],
+      "evidence": [
+        "reports/block09_results.json",
+        "reports/block15_results.json"
+      ],
+      "limits": "Native RAM must have one synchronous read stage and hold its output when disabled. Extra BRAM stages require adaptation; storage and collision detection remain external."
+    },
+    {
+      "id": "R15",
+      "accepted_requirement": "64-entry tagged BTB and 128-entry two-bit bimodal PHT, retirement training, disable mode and FENCE.I invalidation.",
+      "status": "implemented_and_tested",
+      "actual_result": "Two IF lookups use tagged targets and saturating counters; ordered retirement updates fold both lanes, squashed work cannot train, disabled lookup is sequential, and invalidation resets prediction state.",
+      "implementation": [
+        "rtl/rv32_branch_predictor.sv",
+        "rtl/rv32_ooo_core.sv"
+      ],
+      "evidence": [
+        "reports/block10_results.json",
+        "reports/block15_results.json"
+      ],
+      "limits": "No global history, dedicated loop-count predictor or RAS; loop exits may mispredict. Block 10 early integration uses test-only recovery; production recovery is tested separately."
+    },
+    {
+      "id": "R16",
+      "accepted_requirement": "Safe retirement-based recovery with older-fault priority, cancellation acknowledgment, quiescence, committed map restoration and no unsafe identity reuse.",
+      "status": "implemented_and_tested",
+      "actual_result": "RUN/CANCEL/APPLY captures a stable target, requires simultaneous aggregate acknowledgment AND quiescence, keeps cancel asserted during APPLY, then restores maps/flushes queues and redirects fetch.",
+      "implementation": [
+        "rtl/rv32_recovery_controller.sv",
+        "rtl/rv32_ooo_core.sv",
+        "rtl/rv32_rename.sv"
+      ],
+      "evidence": [
+        "reports/block11_results.json",
+        "reports/block15_results.json"
+      ],
+      "limits": "Conservative recovery waits for the precise retirement boundary. Older faults override younger redirects; executing/buffered owners are cancelled before tag reuse."
+    },
+    {
+      "id": "R17",
+      "accepted_requirement": "Memory-order queue depth 4, correct byte lanes/extensions/alignment and head-only external memory effects.",
+      "status": "implemented_and_tested",
+      "actual_result": "Address/store-data preparation may execute early; one actual data transaction issues only for the live incomplete ROB head. Stores complete only after response; wrong-path RAM/MMIO reads and writes are suppressed.",
+      "implementation": [
+        "rtl/rv32_load_store_unit.sv",
+        "rtl/rv32_integer_execute.sv",
+        "rtl/rv32_ooo_core.sv"
+      ],
+      "evidence": [
+        "reports/block12_results.json",
+        "reports/block15_results.json"
+      ],
+      "limits": "No speculative load issue/replay, memory disambiguation, store-to-load forwarding or multiple outstanding data transactions."
+    },
+    {
+      "id": "R18",
+      "accepted_requirement": "Instruction/load/store access errors and misalignment become precise exceptions without faulting destination writes.",
+      "status": "implemented_and_tested",
+      "actual_result": "Error/alignment metadata retains instruction PC and effective address. Trap selection occurs at ROB head after older results; younger side effects are suppressed.",
+      "implementation": [
+        "rtl/rv32_fetch.sv",
+        "rtl/rv32_integer_execute.sv",
+        "rtl/rv32_load_store_unit.sv",
+        "rtl/rv32_reorder_buffer.sv"
+      ],
+      "evidence": [
+        "reports/block09_results.json",
+        "reports/block12_results.json",
+        "reports/block15_results.json"
+      ],
+      "limits": ""
+    },
+    {
+      "id": "R19",
+      "accepted_requirement": "Machine CSRs including status, ISA, interrupts, trap vector/state, scratch, counters/high halves and identification with documented read-only/WARL behavior.",
+      "status": "implemented_and_tested",
+      "actual_result": "mstatus/misa/mstatush/mie/mip/mtvec/mscratch/mepc/mcause/mtval/mcountinhibit, mcycle[h]/minstret[h], zero identification and mconfigptr are supplied. Counter writes suppress whole-counter implicit update on that edge.",
+      "implementation": [
+        "rtl/rv32_csr_file.sv",
+        "docs/block13_explanation.md"
+      ],
+      "evidence": [
+        "reports/block13_results.json",
+        "reports/block15_results.json"
+      ],
+      "limits": "Machine-mode subset only; absent HPM/event-selector CSRs and user counter aliases trap. Fixed/WARL policies are documented, not a full privileged-profile claim."
+    },
+    {
+      "id": "R20",
+      "accepted_requirement": "Precise illegal instruction, ECALL, EBREAK, instruction/load/store alignment/access faults and MRET.",
+      "status": "implemented_and_tested",
+      "actual_result": "Actual encoded instructions and memory-fed handlers read mcause/mepc/mtval, set an explicit resume PC and execute MRET. Fault owner, architectural PC, GPR results and event order are checked.",
+      "implementation": [
+        "rtl/rv32_csr_file.sv",
+        "tb/tb_core_traps.sv"
+      ],
+      "evidence": [
+        "reports/block15_results.json",
+        "reports/block15_simulation.log"
+      ],
+      "limits": "Eleven synchronous-fault fixtures plus combined recovery scenarios are directed evidence, not every privileged corner case."
+    },
+    {
+      "id": "R21",
+      "accepted_requirement": "External/software/timer interrupts with direct/vectored mtvec, external > software > timer priority, drain/recheck and correct next unexecuted mepc.",
+      "status": "implemented_and_tested",
+      "actual_result": "Admission stops on eligibility; admitted instructions and transactions drain; current masks are rechecked; architectural_next_pc rather than fetch PC is saved. Tests cover DIV/load timing, priorities, eligibility withdrawal and MRET.",
+      "implementation": [
+        "rtl/rv32_csr_file.sv",
+        "rtl/rv32_ooo_core.sv",
+        "tb/tb_core_traps.sv"
+      ],
+      "evidence": [
+        "reports/block13_results.json",
+        "reports/block15_results.json"
+      ],
+      "limits": "IRQ inputs must already be synchronous. ACT4 harness ties IRQs low; these interrupt results come from separate directed and AXI-timer tests."
+    },
+    {
+      "id": "R22",
+      "accepted_requirement": "WFI waits without gated clocks and observes local pending wake versus global interrupt enables.",
+      "status": "implemented_and_tested",
+      "actual_result": "Locally enabled pending IRQ wakes WFI with global MIE=0 without a trap; MIE=1 causes precise interrupt entry and return. Clock remains running.",
+      "implementation": [
+        "rtl/rv32_csr_file.sv",
+        "rtl/rv32_ooo_core.sv"
+      ],
+      "evidence": [
+        "reports/block13_results.json",
+        "reports/block15_results.json"
+      ],
+      "limits": ""
+    },
+    {
+      "id": "R23",
+      "accepted_requirement": "FENCE orders memory and FENCE.I makes modified executable RAM visible.",
+      "status": "implemented_and_tested",
+      "actual_result": "Head-only memory plus serialized fences order prior accesses. FENCE.I invalidates predictor/prefetched state and redirects. AXI test confirms an old instruction was prefetched, overwrites it and retires the new word after FENCE.I.",
+      "implementation": [
+        "rtl/rv32_csr_file.sv",
+        "rtl/rv32_ooo_core.sv",
+        "tb/tb_core_axi.sv"
+      ],
+      "evidence": [
+        "reports/block15_results.json",
+        "reports/act4_execution_results.json"
+      ],
+      "limits": ""
+    },
+    {
+      "id": "R24",
+      "accepted_requirement": "AXI4-Lite master: independent channels, stable stalled payloads, exactly-once requests, response completion and fault propagation.",
+      "status": "implemented_and_tested",
+      "actual_result": "Independent AW/W acceptance, held AR, one outstanding read/write, strobes, B/R errors and complete-core bus-error traps are exercised.",
+      "implementation": [
+        "rtl/rv32_axi_lite_master.sv",
+        "rtl/rv32_ooo_axi_top.sv"
+      ],
+      "evidence": [
+        "reports/block14_results.json",
+        "reports/block15_results.json"
+      ],
+      "limits": "Portable wrapper exposes AXI; production routing/interconnect/peripheral IP is outside revised scope."
+    },
+    {
+      "id": "R25",
+      "accepted_requirement": "Custom AXI machine timer/software interrupt slave and connected processor tests.",
+      "status": "implemented_and_tested",
+      "actual_result": "MSIP, 64-bit MTIME and MTIMECMP support byte strobes and level IRQs. Complete-core programs set/clear actual MSIP and MTIMECMP through AXI and return from handlers.",
+      "implementation": [
+        "rtl/rv32_machine_timer.sv",
+        "tb/tb_core_axi.sv"
+      ],
+      "evidence": [
+        "reports/block14_results.json",
+        "reports/block15_results.json"
+      ],
+      "limits": ""
+    },
+    {
+      "id": "R26",
+      "accepted_requirement": "Self-checking tests, timeouts, traces, waveform guidance, stress and current source-hashed evidence.",
+      "status": "implemented_and_tested",
+      "actual_result": "All 15 groups pass 755125 checks; block15 contributes 29474 (16 ISA/data programs, 25 trap scenarios, 7 AXI programs). Wrap/reuse, queue pressure, arbitration, delayed results and recovery priorities are exercised.",
+      "implementation": [
+        "scripts/run_checks.py",
+        "tb/",
+        "rtl/rv32_trace_recorder.sv"
+      ],
+      "evidence": [
+        "reports/local_regression_summary.json",
+        "reports/block01_results.json",
+        "reports/block15_results.json",
+        "reports/clean_waveform_run.json"
+      ],
+      "limits": "Counts are assertions/observations, not distinct instructions, functional coverage percentages, formal proofs or signoff. PRF free-list exhaustion is a unit stress; integrated ROB capacity normally stalls first."
+    },
+    {
+      "id": "R27",
+      "accepted_requirement": "Applicable ACT4-derived architectural programs with exact provenance/accounting, retained inputs and explicit gaps.",
+      "status": "implemented_and_tested",
+      "actual_result": "All 135 delivered final self-checking ELFs pass with zero failed, rejected or timed-out inputs. Manifest exactly matches filenames/hashes; 136 generated source programs and environment are retained.",
+      "implementation": [
+        "verification/act4/",
+        "scripts/act4_elf_to_mem.py",
+        "tb/tb_act4.sv",
+        "scripts/run_act4_suite.py"
+      ],
+      "evidence": [
+        "reports/act4_results.json",
+        "reports/act4_execution_results.json",
+        "verification/act4/manifest.json",
+        "verification/act4/generation_manifest.json"
+      ],
+      "limits": "Pinned 54-program I/M/Zicsr/Zifencei selection regenerated to 136 using upstream splitting. Three non-C alignment sites and three pointer-init prefixes are recorded adaptations. I-jal-00 layout gap was accepted by the user; no privileged ACT4/Sm certification."
+    },
+    {
+      "id": "R28",
+      "accepted_requirement": "Ready-to-run verification inputs without requiring a RISC-V compiler for initial local DUT simulation.",
+      "status": "implemented_and_tested",
+      "actual_result": "135 linked ELFs plus strict Python conversion are delivered; local tests and ELF execution need Python/Icarus/vvp. Source generation/rebuild requires the separately documented ACT4 compiler/Sail environment.",
+      "implementation": [
+        "verification/act4/elfs/",
+        "verification/act4/tests/",
+        "scripts/run_act4_suite.py"
+      ],
+      "evidence": [
+        "verification/act4/manifest.json",
+        "reports/act4_execution_results.json"
+      ],
+      "limits": "These are verification executables, not the application firmware/startup/driver package removed from scope."
+    },
+    {
+      "id": "R29",
+      "accepted_requirement": "Readable block-by-block complete source, role/connection diagrams, signal widths/ownership, timing examples, tests/waves and interview answers.",
+      "status": "documented_and_source_verified",
+      "actual_result": "Fifteen complete guides include the exact complete active RTL and corresponding testbench files, with lesson prefixes and references. Every one of the 24 active RTL source files is represented verbatim.",
+      "implementation": [
+        "docs/block01_complete_guide.md",
+        "docs/block15_complete_guide.md",
+        "scripts/build_guide.py"
+      ],
+      "evidence": [
+        "docs/",
+        "reports/completion_audit.json"
+      ],
+      "limits": "Pedagogical criteria are reviewed separately below; automatic keyword checks are only screening aids."
+    },
+    {
+      "id": "R30",
+      "accepted_requirement": "Reproducible package-first active compiler lists and separation from historical single-issue references.",
+      "status": "implemented_and_tested",
+      "actual_result": "rtl/files.f lists exactly all 24 active .sv files once, package first. Runner reports record actual package-first source commands; historical duplicate modules are outside active lists.",
+      "implementation": [
+        "rtl/files.f",
+        "scripts/run_checks.py",
+        "scripts/run_act4.py",
+        "scripts/run_act4_suite.py",
+        "README.md"
+      ],
+      "evidence": [
+        "reports/core_elaboration.json",
+        "reports/block15_results.json",
+        "reports/act4_execution_results.json"
+      ],
+      "limits": ""
+    },
+    {
+      "id": "R31",
+      "accepted_requirement": "Retain agreed Vivado 2026.1/Linux, Artix-7 xc7a35tcpg236-1, Basys3 reference, 100 MHz input, 50 MHz shared target and 64 KiB RAM specifications.",
+      "status": "retained_specification_only",
+      "actual_result": "Target note documents the selected environment, native-memory latency and external endpoint/clock/reset contracts; package constants retain the clock/RAM/address plan.",
+      "implementation": [
+        "docs/vivado_target.md",
+        "rtl/rv32_ooo_pkg.sv"
+      ],
+      "evidence": [
+        "docs/vivado_target.md"
+      ],
+      "limits": "No Vivado installation/part check, synthesis, fit, timing closure, DRC, constraints, implementation or bitstream result is supplied under the revised scope."
+    },
+    {
+      "id": "R32",
+      "accepted_requirement": "Exclude firmware and FPGA/IP integration as explicitly requested; continue without checkpoint waits after the time cap was extended.",
+      "status": "user_approved_scope_change",
+      "actual_result": "Portable custom RTL, tests and verification inputs remain delivered. No AMD block design/IP wrapper, board constraints, UART/GPIO integration, firmware runtime or bitstream flow is presented as completed.",
+      "implementation": [
+        "README.md",
+        "STATUS.md",
+        "docs/vivado_target.md"
+      ],
+      "evidence": [
+        "accepted conversation scope changes"
+      ],
+      "limits": "The original numbered integration/firmware blocks are intentionally removed, not silently counted as implemented. Checkpoint waits were waived by the user."
+    }
+  ],
+  "documentation_findings": [],
+  "accepted_gaps_and_limits": [
+    {
+      "area": "Accepted JAL architectural-test layout gap",
+      "status": "user_approved_unexecuted_gap",
+      "detail": "I-jal-00.S is retained but cannot link in 64 KiB: cumulative alignment yields image end 0x279c0. Tested offsets are within +/-8192. No cases were counted as passed; directed JAL/JALR programs pass.",
+      "evidence": [
+        "verification/act4/manifest.json",
+        "verification/act4/README.md",
+        "reports/act4_results.json"
+      ]
+    },
+    {
+      "area": "Architectural certification and privileged profiles",
+      "status": "not_claimed",
+      "detail": "ACT4-derived final ELF success covers the selected I/M/Zicsr/Zifencei configuration, not all possible programs or a certification profile. Privileged suites, optional CSR/WARL equivalence and Sm certification were not run."
+    },
+    {
+      "area": "Formal/signoff/silicon",
+      "status": "not_run",
+      "detail": "No exhaustive formal proof, synthesis/latch report, FPGA resource fit, STA, DRC, CDC/RDC, power, silicon validation or advance guarantee is established by simulation."
+    },
+    {
+      "area": "Performance",
+      "status": "maximum_width_only",
+      "detail": "Two is the maximum width, not a guaranteed IPC. Memory is head-only and one outstanding, divider is iterative, prediction recovery waits for retirement, and serialized operations cause stalls."
+    },
+    {
+      "area": "External system contracts",
+      "status": "required_from_integrator",
+      "detail": "Supply synchronous IRQ levels, common clock/reset, one-stage held native RAM output, coherent shared little-endian storage/collision holds and AXI routing/endpoints. Reset endpoints consistently; old pre-reset responses must not alias new work."
+    },
+    {
+      "area": "Deliberately absent architecture",
+      "status": "outside_accepted_version",
+      "detail": "No caches/DDR/MMU/OS boot, speculative load replay/store forwarding, global-history/loop predictor/RAS, U/S modes/PMP, FPU/vector/atomic/compressed ISA, multicore coherence or external debug module."
+    },
+    {
+      "area": "FPGA and firmware delivery",
+      "status": "explicitly_removed_by_user",
+      "detail": "No AMD IP Integrator project, board wrapper, UART/GPIO IP, clock/reset IP, pin constraints, implementation/bitstream flow or application firmware/runtime/driver package; retain target specification only."
+    }
+  ],
+  "reproduction_commands": [
+    "python3 scripts/run_checks.py --block all",
+    "python3 scripts/run_checks.py --block 15 --waves",
+    "python3 scripts/test_act4_elf_to_mem.py",
+    "python3 scripts/run_act4.py --selftest",
+    "python3 scripts/run_act4_suite.py --elf-dir verification/act4/elfs --manifest verification/act4/manifest.json --jobs 8 --max-cycles 1000000 --data-latency 2 --predict 1 --wall-timeout 180",
+    "python3 scripts/build_guide.py"
+  ],
+  "key_evidence_sha256": {
+    "reports/act4_results.json": "c0989ea7da5902da530630e4258313031320135c5f84c989228b8675ce067fb6",
+    "reports/act4_execution_results.json": "d7061b5842322cd73b795a445a19f7691ac07905cf53c4a0968a5140ac9ee495",
+    "reports/clean_waveform_run.json": "b05ff1bf78a3557d70e610895472f757188705aa6a38f63a6149775361d981d6",
+    "reports/core_elaboration.json": "908a65279db56ef6b89c78a683109ec644070f04369f8d9a2e46b113c86bf870",
+    "verification/act4/manifest.json": "b300792298b89c44d621d48bb6a91a05d21f58068dfd2c384e9339999cf049d4",
+    "verification/act4/generation_manifest.json": "8b85cfa5dede3fffab03e6cb9fbbba8c43992fd8cf9ace4e2737057abc9a8933",
+    "scripts/run_checks.py": "66cebe664b8e8fbec26a23e20bc1b1a42d29af0bedd022cb77812b123968a255",
+    "scripts/run_act4_suite.py": "d92ee28e7a5ebbdca18ed713f8703c00df39ac69c374cefbb81b18a2e26e0aa5",
+    "scripts/build_guide.py": "07269a7fe7abfd542912cd3dfbacd048619ffa3baaf840b6891d1843b3d82db4",
+    "rtl/files.f": "0cbb7880ef6b8682fe0cd54fc58c803796aef8da88453b1aa48833a1d1a9a229"
+  },
+  "active_rtl_sha256": {
+    "rtl/rv32_alu.sv": "ede6c6ba45722ab58a791ce606bf959ab619fcb8958abd68e5968a3321901c27",
+    "rtl/rv32_axi_lite_master.sv": "270aab8128f7493ce4650d4451d5ae8709d912eaf390090559e3798957c3e380",
+    "rtl/rv32_branch_compare.sv": "00c8c76aa56fc66a3b6b358219a5eb5aebd61f146ff758b4846e0a0f06ae1f9d",
+    "rtl/rv32_branch_predictor.sv": "f93a2a96c7755ad1709bf0b6ecdd67c5f42f6849f0a4231e07772bef8a74a980",
+    "rtl/rv32_completion_arbiter.sv": "1dde8d9402159ca727094392dd4be64d4b631ccee040623def3c40d0226cc807",
+    "rtl/rv32_csr_file.sv": "6321c25fddb848a73832d183a0054db1c7d42f321ac34cf50aa9c471a265764b",
+    "rtl/rv32_decoder.sv": "aa03431c324e7395562b9ce80477c5da30de4dc89f4beebd16a2c6f0502b34bb",
+    "rtl/rv32_execution_cluster.sv": "f0ed98e0d53bde647ec81fc17b5747c43b50cce7402e3de9788a043bbd835523",
+    "rtl/rv32_fetch.sv": "9137e1443fc3875775921f29a3614d183447581feec17955c4cb85184a71c497",
+    "rtl/rv32_instruction_adapter.sv": "9d6beedc6d7475956cfb6c4816d873c73202427f4bb8e57f859454239c8a0844",
+    "rtl/rv32_integer_execute.sv": "de3e602097f5ae2afecc42b27d833bba7267d27ae9cf612aecaf2814a6fd3fcf",
+    "rtl/rv32_issue_queue.sv": "4de94e7ce32c9e1939e03202031874facfc5b770ee2c84a72d3e1c9bb765b29d",
+    "rtl/rv32_load_store_unit.sv": "9716e35c962728528153e6698f87862957b750ef523ba147d0f4466bb5d2a685",
+    "rtl/rv32_machine_timer.sv": "beb7caa9c569ef701e560ad6b6a1a807da6fa64d351ef20ed073dc760c019e8f",
+    "rtl/rv32_muldiv_execute.sv": "5c8380a195242cd78f8172792ee04c0e67fd744b42836ba7733a3455d19a9e14",
+    "rtl/rv32_ooo_axi_top.sv": "ef76a919c2b56c5e9d18b8ba53f69cfc12181e9d244d455fa4a32c8507a7d45d",
+    "rtl/rv32_ooo_core.sv": "5ecc0c846eb6d647fad9df9d3027e828f8b048eabdf912bf5c47a31790c4d2d3",
+    "rtl/rv32_ooo_pkg.sv": "d152eb7a58413148ed38bede06612267a76491d260e33a40cc6077732ce8860c",
+    "rtl/rv32_physical_regfile.sv": "161392e71a66f32e250b768c71e004e1001d917ef18647b72453144b0c23c033",
+    "rtl/rv32_recovery_controller.sv": "017d3f88576191f446a757028c6d155cb501e9a1716d34c44da52d9cf483be4e",
+    "rtl/rv32_rename.sv": "f0d133b2ac2be3c73cfd37a6e21b6add4f7cf23728d8e1638217a8da4668f107",
+    "rtl/rv32_reorder_buffer.sv": "ad2f5c007f5c00b5c7e4836eed5e86c7dc9d25117ed9eda60d91ac7f3ea80726",
+    "rtl/rv32_trace_recorder.sv": "1cd5551b346a2b6b8fed9412d3312c8ca908d3f9aa69fb020014f8bd740c3af2",
+    "rtl/rv32_writeback.sv": "45a844ddada1c304c725855a2645c883c27a755fa3f19c3e2ed2bf534eaa8d17"
+  },
+  "guide_artifact_sha256": {
+    "docs/block01_complete_guide.md": "94f6b70086132d061477b1172e0a9fae23d34b6a0d5b5c9be5434174fc22a404",
+    "docs/block01_explanation.md": "4a7d77ee9f013c3bb62f44654b74b0568e4bd43820f787ea9da4d9527c399b56",
+    "docs/block02_complete_guide.md": "d58bd622bd4ede35f87fe740f4cc6e2d8ada599335d8d5f0cb6628e44d73d88a",
+    "docs/block02_explanation.md": "bfe27d0b3af0569ceef993dcda3f76414dbf025e059aaa25aaa204501e1d9686",
+    "docs/block03_complete_guide.md": "4965ea325156332715d05c05b8320eccec511f2aa00a4d533625f2100df9732c",
+    "docs/block03_explanation.md": "e3322286f29597050058db7cbe9044151b2823bd921b73d1658e1b2683175adc",
+    "docs/block04_complete_guide.md": "381ddaddf00f1587145d40df03c0761d8e650c99cb3b267410ba708e7cb339cd",
+    "docs/block04_explanation.md": "7152fe87de70511c4ff098ee252003ce4328e268c32f49294d225e73a782bd4f",
+    "docs/block05_complete_guide.md": "cb0ee42c5d9e72f24202ac422d606212b4c0879f52ab1cf7df006d20d5da2e89",
+    "docs/block05_explanation.md": "a5f7177b077980a89a00bcd59cf5805c126a52a6860cea3f0352c73eceef3fcc",
+    "docs/block06_complete_guide.md": "e66397785dd420c48d6c3f06e91ee64d3a044899994f0e618d404c68f524e5b9",
+    "docs/block06_explanation.md": "a21f1dcf95a472482c7ec0194b0a115bd1aea8a1055be5b45149f2eeae99cbaa",
+    "docs/block07_complete_guide.md": "6847dcf7d83687375c2652d80115ef4b32c79160a16889b601c619614fd5954b",
+    "docs/block07_explanation.md": "4fc0587f461d8c6ba304ed92f3f02045bacf7a9918bf804ae915db00a5ffec6a",
+    "docs/block08_complete_guide.md": "71a910a8b2a1cecb492332cfa803b4f403e722ae60ccd1403a56326b5b1e5585",
+    "docs/block08_explanation.md": "b12ad76b47ec7f94b8d9204d5eafc6623285b002cc8749b6877d138f420d31c1",
+    "docs/block09_complete_guide.md": "69e2321b875e4aa62bdebb1606f864da86e12855caf6bee6ab2c615259d7c874",
+    "docs/block09_explanation.md": "667c83d0e544445d05a2f013ae1cf2a6b77f8be4812dc52a42f998448e8c47de",
+    "docs/block10_complete_guide.md": "036fc8e5188f55d0c4101a529b1f3c6244a337e78db38c5a4fcccf63d8c72961",
+    "docs/block10_explanation.md": "6bceaba57f15cbc0ae318a5d9616ccf8bd56b2f0dc82436dcbb8b16d5c7c8761",
+    "docs/block11_complete_guide.md": "4515a6d313a4a5833ec556a24493ec0a0642fc2aab0f4cc2331124ce098fde52",
+    "docs/block11_explanation.md": "6d1c0fb9908ef8f8709480e28e1027c864419cd80d700cc1b007cb9b71c4df20",
+    "docs/block12_complete_guide.md": "b5e5d84a484a38eb9e2295f6aa224e77480421517ce8d89c94d75bc9548ed1b4",
+    "docs/block12_explanation.md": "42c4604e619d7d861b76a7f8d72acd00c2ce28a000c3ba0733a6f09437cd9d06",
+    "docs/block13_complete_guide.md": "c6ebd75f7e3901728ed81344dec375e2173379ff27f879210d1672f537fbd2bc",
+    "docs/block13_explanation.md": "8595502c8ca1125f44fe1a8331d8457e1620c40a33fe56f0afe424eb30e7f856",
+    "docs/block14_complete_guide.md": "49e7f5d961f74a39186b5bd49e9974a6d600e68a665325f73afbc4d6f4bbef82",
+    "docs/block14_explanation.md": "dc88c257d04ddcad3ab5f0ccce4df39a65533502b90b24d30ac41c1dea88e6fa",
+    "docs/block15_complete_guide.md": "823e8e05d06425288dd614850b7bd285200bd72e435c4a8ce0b5d5ce9741cb7d",
+    "docs/block15_explanation.md": "988616a44b79756680df65662af9f3054b82170124dfec5177f93c7063fec821"
+  }
+}

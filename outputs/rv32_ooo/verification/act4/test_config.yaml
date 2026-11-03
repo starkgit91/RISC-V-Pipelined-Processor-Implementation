@@ -1,0 +1,13 @@
+# Adapted from riscv/riscv-arch-test SERV configuration.
+# Copyright (c) 2026, Harvey Mudd College
+# SPDX-License-Identifier: Apache-2.0
+name: custom-rv32im
+compiler_exe: riscv64-unknown-elf-gcc
+objdump_exe: riscv64-unknown-elf-objdump
+ref_model_exe: sail_riscv_sim
+udb_config: custom-rv32im.yaml
+linker_script: link.ld
+dut_include_dir: .
+harts: 1
+# First pass: ISA tests only. This is not a machine-mode certification claim.
+include_priv_tests: false

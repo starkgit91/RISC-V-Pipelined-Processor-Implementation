@@ -1,0 +1,20 @@
+{
+  "entry": 0,
+  "ram_bytes": 65536,
+  "segments": [
+    {
+      "start": 0,
+      "end": 47040,
+      "file_bytes": 47040,
+      "zero_fill_bytes": 0,
+      "executable": true
+    }
+  ],
+  "status": "converted_not_executed",
+  "source": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/verification/act4/elfs/rv32i/I/I-lw-00.elf",
+  "elf_sha256": "70704b13af244d6e162805fb9cf9df62b62698a0532004c91c996cafbc1e1e30",
+  "outputs": {
+    "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_final_execution/run-20261103T072205424406Z/00041_I-lw-00/image.words.hex": "1a7c2c33c39cf64dd32aeb3e317016fa2d2454a7dead6d88c568f71856d00369",
+    "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_final_execution/run-20261103T072205424406Z/00041_I-lw-00/image.rows.hex": "f174ca9434406ca716d3525f4f0ed4e52be254a7d70c60275de51cf37e259979"
+  }
+}

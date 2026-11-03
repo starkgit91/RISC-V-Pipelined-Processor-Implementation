@@ -1,0 +1,27 @@
+{
+  "block": 13,
+  "status": "passed",
+  "architecture_target": "two_issue_RV32IM_Zicsr_Zifencei",
+  "scope": "serialized CSR commit, machine traps, interrupt eligibility and WFI",
+  "checks": 511,
+  "failures": 0,
+  "cases": [
+    {
+      "top": "tb_block13",
+      "scope": "serialized CSR commit, machine traps, interrupt eligibility and WFI",
+      "checks": 511,
+      "failures": 0
+    }
+  ],
+  "simulator": "Icarus Verilog version 13.0 (stable) (v13_0)",
+  "sources_sha256": {
+    "rtl/rv32_csr_file.sv": "6321c25fddb848a73832d183a0054db1c7d42f321ac34cf50aa9c471a265764b",
+    "rtl/rv32_ooo_pkg.sv": "d152eb7a58413148ed38bede06612267a76491d260e33a40cc6077732ce8860c",
+    "tb/tb_block13.sv": "380823c593dd9c30314443639107c6fd5e66fee5d8bf500160b10ed0daf7ec53"
+  },
+  "not_verified": [
+    "interrupt drain and trap integration in assembled core",
+    "tests outside each case scope; official architectural certification",
+    "Vivado synthesis, implementation, or bitstream generation"
+  ]
+}

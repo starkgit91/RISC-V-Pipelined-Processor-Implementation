@@ -1,120 +1,130 @@
-# Two-issue RV32 out-of-order learning project
+# Two-issue RV32 out-of-order processor
 
-The target is one RV32IM_Zicsr_Zifencei processor, organized as five logical sections:
-IF, ID/rename, EX/scheduling, MEM, and WB/commit. The approved revision is two-wide fetch,
-dispatch, issue, completion, and retirement. Instructions still commit in program order.
+This project implements a custom RV32IM_Zicsr_Zifencei processor with two-wide
+fetch, dispatch, issue, completion, and in-order retirement. Its five logical
+sections are IF, ID/rename, EX/scheduling, MEM, and WB/commit. Queues and
+multicycle execution make instruction latency variable.
 
-**Current state: blocks 1 through 8 are implemented and tested at block level.** These include
-shared definitions, decoder/ALU/comparator, four-read/two-write physical registers, two-wide
-renaming, a two-wide ROB/trace recorder, the two-issue scheduler, and real integer/multiply/divide
-execution paths, plus production completion arbitration and accepted-value writeback. This is
-not yet a complete CPU. Fetch, LSU, prediction, machine control, AXI, firmware, and Vivado
-integration remain.
+All 15 local regression groups pass, including the assembled production core.
+The integrated tests comprise 16 ISA/data programs with an independent
+architectural reference, 25 fault/interrupt scenarios, and seven AXI-connected
+programs. See [STATUS.md](STATUS.md) for exact coverage and remaining work.
+Official ACT4 results are tracked separately in
+[the architectural-test guide](docs/act4_verification.md).
 
-## Read the lessons in order
+Firmware and FPGA/IP integration were removed from scope by the user.
+The agreed Vivado/Artix-7 specifications remain in
+[the target note](docs/vivado_target.md). No synthesis, timing closure, or
+bitstream result is claimed.
 
-Each complete guide includes the actual source files compiled by the tests, explanatory
-connections, signal roles, examples, and interview questions.
+## Read the architecture in order
 
-| Block | Complete guide | Implemented behavior |
+Each complete guide contains the actual complete RTL and relevant self-checking
+SystemVerilog testbenches, preceded by the block's connections, circuit behavior,
+cycle examples, signal roles, waveform guidance, and interview questions.
+
+| Block | Complete guide | Architectural function |
 |---|---|---|
-| 1 | docs/block01_complete_guide.md | Configuration, per-instruction records, and paired transport |
-| 2 | docs/block02_complete_guide.md | Full supported encoding decode, integer ALU, branch comparisons |
-| 3 | docs/block03_complete_guide.md | Four reads, two writes, p0, dual completion bypass |
-| 4 | docs/block04_complete_guide.md | Pair dependencies, allocation, readiness, ordered map updates |
-| 5 | docs/block05_complete_guide.md | Dual completion, ordered retirement/traps, recovery lock, trace |
-| 6 | docs/block06_complete_guide.md | Oldest-ready two-port matching, accepted-result wakeup, recovery gating |
-| 7 | docs/block07_complete_guide.md | Independent execution, iterative RV32M, held results, cancellation |
-| 8 | docs/block08_complete_guide.md | Five sources, two retained buffers, accepted PRF writes/wakeup |
+| 1 | [Configuration](docs/block01_complete_guide.md) | Instruction records, physical/ROB identities, paired transport |
+| 2 | [Decoder and integer ALU](docs/block02_complete_guide.md) | Encoding checks, immediates, arithmetic, shifts, comparisons |
+| 3 | [Physical register file](docs/block03_complete_guide.md) | Four reads, two writes, constant p0, completion bypass |
+| 4 | [Rename and readiness](docs/block04_complete_guide.md) | Pair dependencies, free allocation, speculative/committed maps |
+| 5 | [ROB and retirement](docs/block05_complete_guide.md) | Completion ownership, ordered commitment, precise trap trace |
+| 6 | [Issue scheduler](docs/block06_complete_guide.md) | Oldest-ready matching, RAW wakeup, execution-resource checks |
+| 7 | [Execution units](docs/block07_complete_guide.md) | Two integer lanes and independent iterative multiply/divide |
+| 8 | [Completion and writeback](docs/block08_complete_guide.md) | Five held sources, two retained outputs, accepted-result broadcast |
+| 9 | [Instruction fetch](docs/block09_complete_guide.md) | 64-bit synchronous memory, paired buffering, stale responses |
+| 10 | [Branch prediction](docs/block10_complete_guide.md) | Tagged BTB, two-bit PHT, retirement-ordered training |
+| 11 | [Recovery](docs/block11_complete_guide.md) | Cancel/drain barrier, safe map restoration, redirect |
+| 12 | [Load/store engine](docs/block12_complete_guide.md) | Ordered memory queue, head-only transactions, byte lanes, faults |
+| 13 | [Machine state](docs/block13_complete_guide.md) | CSR commitment, counters, precise exceptions, interrupts, WFI |
+| 14 | [AXI and timer](docs/block14_complete_guide.md) | Independent channels, held requests, errors, software/timer IRQs |
+| 15 | [Complete processor](docs/block15_complete_guide.md) | Production wiring, AXI wrapper, architectural/trap/bus tests |
 
-The decoder is a reusable per-instruction module; the later front end will decode a pair.
-Both integer execution instances reuse the block-2 ALU. Multiply/divide runs in its separate
-iterative unit; CSR/system execution and the machine-state controller remain later blocks.
+[Feature checklist](docs/feature_checklist.md) maps implemented behavior to test evidence
+and lists the deliberate boundaries.
 
-## Run the available tests
+[Instruction and hazard reference](docs/isa_and_hazards.md) relates these
+instructions to loops, if/else, register renaming, forwarding, and stalls.
+The final top-level modules are `rtl/rv32_ooo_core.sv` (native memory handshakes)
+and `rtl/rv32_ooo_axi_top.sv` (native instruction RAM plus AXI4-Lite data master).
+The wrapper exposes interrupt inputs and retirement trace outputs.
 
-From this directory with Python 3, Icarus Verilog, and vvp available:
+## Run the local tests
+
+Use Python 3, Icarus Verilog, and vvp; no external Python package is needed for
+these RTL regressions:
 
 ```sh
 python3 scripts/run_checks.py --block all
+python3 scripts/run_checks.py --block 15 --waves
+python3 scripts/test_act4_elf_to_mem.py
+python3 scripts/run_act4.py --selftest
 python3 scripts/build_guide.py
 ```
 
-Select one block with `--block 1` through `--block 8`. Add `--waves` for optional clocked VCDs
-under build/block03 through build/block08. No external Python packages are required.
-The runner returns a nonzero status on compilation error, failed checks, or timeout.
+Select any block from `1` through `15`. A nonzero exit indicates a compile error,
+failed check, or timeout. Optional VCDs are generated under `build/`. Reports in
+`reports/` retain exact source SHA-256 values, scope, counts, and simulator logs.
+Assertion counts describe each test's observations; they do not establish
+exhaustive coverage or architectural certification.
 
-Each reports/blockNN_results.json identifies scope, test cases, counts, and exact source hashes.
-The accompanying log retains simulator output, including Icarus's known always_comb whole-vector
-sensitivity notices. A successful block test is not whole-core ISA compliance or timing closure.
+Block 15 connects the real fetch, rename, scheduler, execution engines,
+completion arbiter, ROB, recovery controller, LSU, and CSR unit. Earlier block
+tests deliberately isolate components; their documented models remain useful
+for learning but are superseded by the full-core evidence for composition.
+The AXI-connected tests also use the actual AXI master and custom timer.
+Their RAM/address fabric is a simulation model, not delivered FPGA integration.
 
-Block 5 includes an additional connected control/storage test: rename and ROB agree on atomic
-pair acceptance, accepted completions reach physical storage/readiness, retirement advances the
-committed map, and stale results cannot overwrite stored values. Values are injected by the
-bench; this does not simulate a real DIV unit.
+The ELF harness has its own PASS/FAIL/timeout checks. Those seven infrastructure
+cases are locally encoded programs and must not be described as official ACT4
+tests. ACT4 dependency versions, configuration, provenance, and execution results
+belong to its separate guide and reports.
 
-Block 6 adds an independent scheduler test and a connected rename/ROB/PRF/IQ/trace test. Two
-ready younger instructions issue while an older instruction waits; an accepted producer result
-wakes that instruction with same-cycle PRF bypass. The scheduler is real RTL, but execution
-engines in that historical test are modeled. Block 7 connects real execution engines and uses a
-test-only completion selector; block 8 implements the production completion path.
+## Circuit and timing contracts
 
-Block 7's actual RTL demo issues DIV100/4 and ADD7+9 together at cycle 6. ADD completes at cycle 7,
-DIV at 39, and the dependent ADD captures 25+16 through bypass on that same cycle. DIV and ADD
-retire in order at cycle 40; the dependent result 41 retires at cycle 41. Separate tests cover
-RV32M arithmetic, branch/address faults, retained outputs, cancellation, and safe owner reuse.
+- Rename removes WAR/WAW false dependencies; physical tags/readiness preserve RAW.
+- An independent younger ADD can issue/complete while an older DIV runs. The ROB
+  commits their results in program order, at up to two instructions per cycle.
+- The two-write-port completion path may backpressure a third finished unit. A
+  producer holds its entire result until accepted; a speculative result becomes
+  architectural only at retirement.
+- Loads/stores prepare addresses ahead of retirement, but actual data requests
+  issue only for the live incomplete ROB head. One data transaction is outstanding.
+  Stores wait for the response, preventing wrong-path memory/peripheral effects.
+- Branch mismatch stops new admission while older work finishes. Recovery waits
+  for cancellation acknowledgments and quiet execution before restoring the
+  committed rename map and reusing identities.
+- Interrupts stop admission, drain admitted work, recheck enables, and save the
+  next unexecuted architectural PC. Synchronous faults take priority.
+- Native instruction memory has one synchronous read latency. Fetch credits and
+  stale-response state preserve ownership through stalls and repeated redirects.
+- FENCE.I orders older stores, flushes prefetched instructions/prediction, and
+  restarts fetch so modified executable RAM becomes visible.
 
-Block 8 uses production arbitration/writeback, with five held producer interfaces and two
-registered output slots. Three real completions are synchronized: older DIV and ALU 0 transfer
-first, while ALU 1 retains its packet. Source capture is separate from ROB acceptance; only
-accepted nonfaulting register results write/broadcast. Buffering changes the demonstration's
-completion latency: independent ADD completes at 9, DIV/RAW wakeup at 41; their retirements
-remain ordered at 42 and 44. Block 7's earlier timing belongs to its direct test selector.
+## Fixed configuration
 
-## Vivado XSim on Linux
-
-Source your Vivado installation's settings64.sh first. For the standalone ROB test:
-
-```sh
-xvlog --sv rtl/rv32_ooo_pkg.sv rtl/rv32_reorder_buffer.sv rtl/rv32_trace_recorder.sv tb/tb_block05.sv
-xelab tb_block05 -s block05_sim
-xsim block05_sim --runall
-```
-
-Each lesson includes its own source list and XSim commands. The package must compile first.
-Vivado/XSim, synthesis, placement/routing, timing, DRC, and bitstream generation have not been
-run in this workspace. Their reproducible FPGA flow belongs to the later integration blocks.
-
-## Fixed target
-
-| Item | Configuration |
+| Item | Selection |
 |---|---|
-| ISA | RV32IM_Zicsr_Zifencei, machine mode only |
-| Width target | Up to two fetch/dispatch/issue/completion/retirement operations per cycle |
-| Physical register file | 64 identities, four reads, two writes; p0 constant |
+| ISA/privilege | RV32IM_Zicsr_Zifencei, machine mode only |
+| Width | Up to two fetch/dispatch/issue/completion/retirement operations per cycle |
+| Registers | 32 architectural; 64 physical; four reads/two writes; p0 constant |
 | Queues | 16 ROB, 8 issue, 4 ordered memory, 4 fetch |
-| Prediction target | 64-entry BTB and 128 two-bit PHT counters |
-| Memory target | 64 KiB shared executable dual-port BRAM |
-| FPGA target | xc7a35tcpg236-1, Basys-3 reference pins |
-| Tools | Vivado 2026.1 on Linux; portable simulation with Icarus |
-| Clock target | 100 MHz reference input, 50 MHz system |
+| Prediction | 64-entry tagged BTB; 128 two-bit PHT counters |
+| Memory | 64 KiB shared executable RAM; 64-bit instruction rows, 32-bit data |
+| FPGA specification | xc7a35tcpg236-1, Basys 3 reference, Vivado 2026.1 Linux |
+| Clock target | 100 MHz reference; 50 MHz processor/AXI target, unverified |
 
-Two-issue permits two independent instructions to issue together; it does not guarantee IPC=2
-on every program. Dependencies, resource availability, branches, and ordered memory still matter.
-The physical/committed versions, completion/retirement distinction, and precise recovery rules
-remain essential.
+Actual throughput depends on dependencies, functional-unit availability,
+branches, and memory. Two-issue does not guarantee IPC=2 or CPI=1 on every
+program. Global-history/loop predictors, RAS, caches, speculative memory replay,
+MMU, U/S modes, OS boot, floating point, vectors, atomics, and compressed
+instructions are outside this version.
 
-Memory requests will start only at a live incomplete ROB head, one outstanding data transaction
-at a time. Branch recovery restores committed mappings after cancellation/draining; it preserves
-physical values and slot generations. Actual FPGA fit and timing remain to be verified.
+## Historical learning material
 
-## Historical checkpoint
-
-reference/single_issue contains the verified original blocks 1–4, including their source-hashed
-reports and lessons. reference/single_issue_drafts contains the unverified old ROB/trace drafts.
-These are teaching references, not part of the active two-issue source lists. Historical files
-retain their original module names: compiling reference files with active RTL would create
-duplicate definitions. Use the provided active rtl/tb lists.
-
-STATUS.md tracks remaining blocks and the next user learning checkpoint. The overall processor
-objective remains active and incomplete.
+`reference/single_issue` preserves the original verified blocks 1–4 and reports.
+`reference/single_issue_drafts` holds old unverified ROB drafts. These are
+historical teaching files, excluded from all active build lists. Their original
+module names duplicate active modules; do not recursively compile reference
+folders with active RTL. Use `rtl/files.f` or the scripts' explicit source lists.

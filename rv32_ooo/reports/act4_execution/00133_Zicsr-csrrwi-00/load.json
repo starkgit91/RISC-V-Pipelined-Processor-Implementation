@@ -1,0 +1,20 @@
+{
+  "entry": 0,
+  "ram_bytes": 65536,
+  "segments": [
+    {
+      "start": 0,
+      "end": 44352,
+      "file_bytes": 44352,
+      "zero_fill_bytes": 0,
+      "executable": true
+    }
+  ],
+  "status": "converted_not_executed",
+  "source": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/verification/act4/elfs/rv32i/Zicsr/Zicsr-csrrwi-00.elf",
+  "elf_sha256": "aca0369041e22faf05f3a697271b9dc0fad9a7678ab60160c618bb9c5ecc59c2",
+  "outputs": {
+    "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_final_execution/run-20261103T072205424406Z/00133_Zicsr-csrrwi-00/image.words.hex": "1a4b1e16bcca5d43155c07404b793eca5582dfa36e8f2cfbed28cf62a366778d",
+    "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_final_execution/run-20261103T072205424406Z/00133_Zicsr-csrrwi-00/image.rows.hex": "ccc38b339727bb652b79f87748bc36228eeade43a37df01ee696cc7533c36191"
+  }
+}

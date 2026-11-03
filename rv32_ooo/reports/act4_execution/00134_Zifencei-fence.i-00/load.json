@@ -1,0 +1,20 @@
+{
+  "entry": 0,
+  "ram_bytes": 65536,
+  "segments": [
+    {
+      "start": 0,
+      "end": 36256,
+      "file_bytes": 36256,
+      "zero_fill_bytes": 0,
+      "executable": true
+    }
+  ],
+  "status": "converted_not_executed",
+  "source": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/verification/act4/elfs/rv32i/Zifencei/Zifencei-fence.i-00.elf",
+  "elf_sha256": "5e7fdbc81704102d84a736d83c4999afded491baee2c4e295e9d2d745feef203",
+  "outputs": {
+    "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_final_execution/run-20261103T072205424406Z/00134_Zifencei-fence.i-00/image.words.hex": "2ad8ebc0a1a8011b040b6d9b4313032ec71df92cd0334e4362b20f4fa5f454c7",
+    "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_final_execution/run-20261103T072205424406Z/00134_Zifencei-fence.i-00/image.rows.hex": "e963a1511a8f4bad92992a9cb9a0b9899e8f5cb3ec36df34f018073ad9360069"
+  }
+}

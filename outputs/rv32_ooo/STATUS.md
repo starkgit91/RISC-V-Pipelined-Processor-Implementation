@@ -1,125 +1,63 @@
-# Implementation evidence and next checkpoint
+# Implementation and verification status
 
-The overall objective remains incomplete. Completion requires the processor, AXI system,
-firmware, documentation, and the agreed verification/build deliverables.
+The two-issue out-of-order processor and its portable AXI wrapper are implemented.
+All 15 local regression groups pass on the current sources. Block 15 exercises
+the assembled production core, including its production recovery controller.
+Official ACT4 setup, final documentation, and delivery audit are in progress.
+The overall task remains active until that work is finished.
 
-## Current architecture decision
+Firmware and FPGA/IP integration were removed from scope by the user.
+The agreed part and clock targets remain in `docs/vivado_target.md`.
+No Vivado synthesis, timing, DRC, or bitstream result is claimed.
+The initial 20-minute limit was exceeded; the user authorized continued
+full-core verification and waived checkpoint waits.
 
-The user selected two-issue after the architecture discussion. Blocks 1–8 now use the revised
-interfaces for two-wide dispatch, issue, completion, and retirement; fetch remains a future
-block. The active register file has four read ports and two write ports; two-wide renaming and
-the ROB are tested as well.
-The verified single-issue checkpoint is preserved under reference/single_issue. Reports from
-that checkpoint do not prove the revised interfaces; current tests must be rerun after revision.
+| Block | Checks passed | Scope |
+|---|---:|---|
+| 1 | 130 | Shared configuration and packed records |
+| 2 | 22,708 | Decode, immediate generation, ALU, comparisons |
+| 3 | 155,389 | Four-read/two-write physical register file and bypass |
+| 4 | 155,233 | Dual rename, allocation, readiness, committed mapping |
+| 5 | 18,611 | ROB ownership, ordered retirement, precise fault trace |
+| 6 | 34,097 | Two-port oldest-ready scheduling and dependency wakeup |
+| 7 | 121,718 | Integer/branch/address execution and iterative RV32M |
+| 8 | 53,111 | Completion arbitration, backpressure, accepted writeback |
+| 9 | 66,609 | Paired synchronous fetch, buffering, stale responses |
+| 10 | 75,980 | BTB/PHT lookup, ordered training, loop prediction |
+| 11 | 19,625 | Production cancellation/quiescence/recovery protocol |
+| 12 | 1,067 | Ordered memory queue, lanes, extension, fault handling |
+| 13 | 511 | Committed CSRs, counters, traps, IRQ eligibility, WFI |
+| 14 | 862 | Independent AXI channels, errors, machine timer |
+| 15 | 29,474 | Assembled core architectural, trap, and AXI programs |
 
-Block 5's provisional single-issue ROB/trace-recorder drafts are saved outside active RTL.
-The active two-wide ROB/trace revision and connected control/storage test pass Icarus. The user's
-chosen teaching example remains an older DIV and a younger ADD completing first.
+Check counts are assertions at the stated test scope, not numbers of distinct
+instructions or a measure of exhaustive coverage. Exact source hashes and logs
+are recorded in `reports/blockNN_results.json` and accompanying logs.
 
-| Block | Deliverable | Current state |
-|---|---|---|
-| 1 | Configuration, instruction definitions, physical tags, queue records | Implemented; Icarus declaration tests pass |
-| 2 | Decoder, immediate generator, ALU, shifts, comparisons | Implemented; Icarus combinational tests pass |
-| 3 | Physical register file and bypass | Four-read/two-write revision tests pass |
-| 4 | Rename maps, free list, readiness | Two-wide revision tests pass |
-| 5 | Reorder buffer and retirement | Two-wide unit and connected control/storage tests pass |
-| 6 | Issue queue and oldest-ready scheduling | Two-issue unit and connected scheduling tests pass |
-| 7 | Independent integer and iterative multiply/divide execution | Unit and connected real-execution tests pass |
-| 8 | Completion arbitration and speculative writeback | Standalone and connected production-writeback tests pass |
-| 9 | Fetch unit and synchronous BRAM adapter | Not implemented |
-| 10 | BTB/PHT predictor | Not implemented |
-| 11 | Misprediction recovery and cancellation | Not implemented |
-| 12 | Ordered memory queue and LSU | Not implemented |
-| 13 | CSRs, exceptions, interrupts, system instructions | Not implemented |
-| 14 | AXI4-Lite master and machine timer | Not implemented |
-| 15 | Complete processor integration and OoO demonstrations | Not implemented |
-| 16 | Vivado block design, FPGA wrapper, constraints | Not implemented |
-| 17 | Firmware, architectural tests, implementation and bitstream flow | Not implemented |
+Block 15 comprises 16 ISA/data programs checked against an independently written
+architectural reference, 25 trap/interrupt scenarios, and seven AXI-connected
+programs. It covers real out-of-order completion with ordered retirement,
+wrong-path MMIO suppression, older-fault/younger-branch priority, replacement of
+a younger recovery boundary by an older branch, interrupt draining and MRET,
+read/write bus errors, and a prefetched old instruction replaced using FENCE.I.
+Prediction-enabled and disabled loop runs have equal architectural traces.
 
-## Current evidence
+Tests found and resolved a counter-write priority bug: an explicit write now
+suppresses the implicit update to the entire 64-bit counter on that edge.
+The LSU also rejects a preparation packet with mismatched signedness metadata.
+Both fixes have directed regressions and pass the full-core suites.
 
-Block 1's compilation and tests cover configuration dimensions, ROB identity representation,
-record transport, physical-destination metadata, exception metadata, and memory request fields.
-They do not simulate instruction execution, allocation, scheduling, recovery, AXI, or interrupts.
-See `reports/block01_results.json` for source hashes and the exact check count.
+Block 10's early loop test uses test-only recovery. Blocks 11 and 15 supply the
+separate evidence for the production recovery implementation. Earlier connected
+block tests retain their documented test models; their pass is not substituted
+for the later full-core evidence.
 
-Block 2's compilation and tests cover encoding legality, immediate generation, source-use flags,
-integer ALU results, and branch conditions. The testbench covers all R-type selector combinations,
-all signed 12-bit I/S immediates, shift restrictions, edge/random operands, and other directed cases.
-It does not implement or test the full execution wrapper, renaming, retirement, memory effects,
-CSR side effects, or trap entry. See `reports/block02_results.json` for exact evidence and scope.
+The AXI wrapper exposes a native instruction-RAM port and an AXI4-Lite data
+master. RAM, address decoding, and peripherals around that wrapper are testbench
+models here. The custom timer is synthesizable RTL. AMD block design, board
+wrapper, UART/GPIO IP, firmware, and bitstream generation are outside the revised
+scope. The RTL is written for synthesis, but FPGA fit and timing are unverified.
 
-Block 3's clocked tests cover physical value storage, asynchronous reset, four independent read
-ports, two writes, dual completion bypass, p0 protection, and enabled-edge persistence.
-They use an independent reference array and include all write-address pairs, read-port combinations,
-conflict diagnostics, and randomized legal cycles. They do not validate readiness, rename allocation,
-ROB ownership checks, completion arbitration, or architectural commitment. Exact evidence is in
-`reports/block03_results.json`; an optional VCD is generated with the runner's `--waves` option.
-
-Block 4 checks paired speculative/committed maps, physical allocation, readiness, completion bypass,
-dual ordered retirement supplied by the testbench, and recovery application. It includes
-within-pair dependencies, prefix/compaction, concurrency, unit exhaustion, and mixed traffic against
-an independent reference. It does not implement the ROB, scheduler, completion ownership checks,
-or the execution-cancellation barrier. See `reports/block04_results.json` for exact evidence.
-
-Block 5 checks two-wide dispatch/completion/retirement, ownership/generation rejection, precise
-fault prefixes, serialization, recovery locking, safe apply, and ordered trace registration.
-An additional connected test couples rename, ROB, physical registers, and trace with injected
-completion values. It verifies atomic pair handshakes and accepted-versus-stale write gating.
-Actual execution units, cancellation, memory transactions, and CSR updates remain
-unimplemented. `reports/block05_results.json` lists the two test cases and their source hashes.
-
-Vivado is not installed in this workspace. Its compilation, synthesis, timing, DRC, and bitstream
-results remain unverified until the corresponding Linux flow is actually run.
-
-Block 6 checks the eight-entry queue, two-port oldest-ready matching, source readiness,
-accepted dual-completion wakeup, operand capture, current-capacity prefix admission, resource
-availability, wraparound, system-head restrictions, misprediction filtering, and safe clear.
-The standalone selection oracle enumerates legal assignments independently of the RTL's greedy
-matching. Its 34,054 checks and the connected test's 43 checks pass: 34,097 total. The connected
-case includes rename, ROB, PRF, IQ, and trace, with simulated execution sinks and injected values.
-It demonstrates out-of-order issue and in-order retirement, not real DIV execution.
-See reports/block06_results.json for exact source hashes and scope.
-
-Block 7 implements two integer instances, branch/jump/address preparation on port 0, and a
-separate 32-iteration multiply/divide unit. Result buffers retain owner metadata under
-backpressure. All three resources cancel running/held work and acknowledge quiescence.
-The memory preparation record now preserves control-flow metadata until the eventual LSU
-completion. No memory request or CSR side effect is implemented by these units.
-
-121,060 standalone checks and 658 connected checks pass: 121,718 total. Actual decoded ADDI
-instructions seed operands; real DIV and ADD both issue at cycle 6, ADD completes at 7, DIV at
-39, and the dependent ADD issues at 39. Retirement is DIV/independent ADD at 40, dependent ADD
-at 41. Three held results, cancellation, generation reuse, and delayed-result suppression are
-also tested. The connected completion selector is test-only; block 8 remains unimplemented.
-See reports/block07_results.json for source hashes and precise scope. Earlier source-hashed
-reports remain valid against the updated shared package after regression.
-
-Block 8 now contains the production five-source/two-buffer completion arbiter and accepted-value
-writeback wrapper. Output lanes retain their payloads independently under backpressure. Input
-capture can overlap output consumption; ROB validation still precedes all PRF writes and
-readiness/wakeup. Cancellation clears the arbiter in addition to the execution units.
-52,221 standalone checks and 890 connected checks pass: 53,111 total. The connected test
-synchronizes three real completions, verifies two old-priority source captures and retained
-third output, and exercises stalls/cancellation/reuse. Synthetic stale-generation and wrong-pdst
-packets pass through real ROB rejection without physical or architectural effects. The production
-buffer adds a completion-stage cycle: real DIV/ADD issue7, ADD accepted9, DIV/dependent issue41,
-older pair retire42, dependent retire44. Source hashes are in reports/block08_results.json.
-All blocks 1–7 pass again with the updated shared package.
-
-## Block 9 learning checkpoint
-
-The next block will implement instruction fetching, synchronous native BRAM access, paired
-instruction delivery, buffering, and stale-response cancellation. It will supply valid PC,
-instruction, prediction, and fetch-fault records to decode/rename and obey front-end backpressure.
-The proposed instruction-memory interface reads 64 bits per aligned row so it can supply two
-32-bit instructions per cycle. Shared RAM keeps a 32-bit data port. AMD PG058 documents that
-IP Integrator does not support asymmetric BMG port widths, so the planned Vivado flow will
-generate the memory IP separately with Tcl and connect it to the block design through the
-FPGA wrapper. This keeps the selected two-wide fetch and shared-memory organization. The
-memory-generation/wrapper flow still needs actual Vivado validation in block 16.
-Reference: https://docs.amd.com/api/khub/documents/V70n09duEdKgzrX2d1W97g/content
-
-Before block 9 coding, choose the leading example: two instructions from a synchronous 64-bit
-BRAM read, or discarding an old fetch response after a redirect. Both will be covered. There
-is no block 9 RTL yet; implementation waits for the user's learning-checkpoint answer.
+No advance guarantee, exhaustive formal proof, architectural certification,
+silicon validation, or production-readiness claim is made. ACT4 results will be
+reported separately from these local directed and randomized tests.

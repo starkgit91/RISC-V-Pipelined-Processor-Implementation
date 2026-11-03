@@ -1,0 +1,28 @@
+{
+  "block": 14,
+  "status": "passed",
+  "architecture_target": "two_issue_RV32IM_Zicsr_Zifencei",
+  "scope": "AXI-Lite master channels and machine timer/software interrupt slave",
+  "checks": 862,
+  "failures": 0,
+  "cases": [
+    {
+      "top": "tb_block14",
+      "scope": "AXI-Lite master channels and machine timer/software interrupt slave",
+      "checks": 862,
+      "failures": 0
+    }
+  ],
+  "simulator": "Icarus Verilog version 13.0 (stable) (v13_0)",
+  "sources_sha256": {
+    "rtl/rv32_axi_lite_master.sv": "270aab8128f7493ce4650d4451d5ae8709d912eaf390090559e3798957c3e380",
+    "rtl/rv32_machine_timer.sv": "beb7caa9c569ef701e560ad6b6a1a807da6fa64d351ef20ed073dc760c019e8f",
+    "rtl/rv32_ooo_pkg.sv": "d152eb7a58413148ed38bede06612267a76491d260e33a40cc6077732ce8860c",
+    "tb/tb_block14.sv": "3c73744f391ce9ef7b6c6dba4cde0bcaf5d3fb179dceea0202bba42e6bdbd8a4"
+  },
+  "not_verified": [
+    "full processor-to-AXI system integration",
+    "tests outside each case scope; official architectural certification",
+    "Vivado synthesis, implementation, or bitstream generation"
+  ]
+}

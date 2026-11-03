@@ -1,0 +1,27 @@
+{
+  "block": 11,
+  "status": "passed",
+  "architecture_target": "two_issue_RV32IM_Zicsr_Zifencei",
+  "scope": "production cancellation acknowledgment/quiescence barrier and safe apply sequencing",
+  "checks": 19625,
+  "failures": 0,
+  "cases": [
+    {
+      "top": "tb_block11",
+      "scope": "production cancellation acknowledgment/quiescence barrier and safe apply sequencing",
+      "checks": 19625,
+      "failures": 0
+    }
+  ],
+  "simulator": "Icarus Verilog version 13.0 (stable) (v13_0)",
+  "sources_sha256": {
+    "rtl/rv32_ooo_pkg.sv": "d152eb7a58413148ed38bede06612267a76491d260e33a40cc6077732ce8860c",
+    "rtl/rv32_recovery_controller.sv": "017d3f88576191f446a757028c6d155cb501e9a1716d34c44da52d9cf483be4e",
+    "tb/tb_block11.sv": "c0833345db77ee4e8d9d1e8b50becdc5d2de23e2154b8855e5813d3b38559787"
+  },
+  "not_verified": [
+    "formal proof of recovery or arbitrary external protocol violations",
+    "tests outside each case scope; official architectural certification",
+    "Vivado synthesis, implementation, or bitstream generation"
+  ]
+}

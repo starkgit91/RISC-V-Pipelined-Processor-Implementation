@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "scope": "synthetic_ELF_loader_regressions_only",
+  "tests": 10,
+  "official_act4_elfs_executed": 0,
+  "certification_claim": false,
+  "command": [
+    "/opt/homebrew/opt/python@3.14/bin/python3.14",
+    "scripts/test_act4_elf_to_mem.py"
+  ],
+  "source_sha256": {
+    "scripts/act4_elf_to_mem.py": "1e827f2f883a077c3351d2e1f5704bc8adf1770e8c0851ab4ce873b9b75b7225",
+    "scripts/test_act4_elf_to_mem.py": "0609456200f676b3a72e805df1241d63d14ce673eb454ea27cfd18a2ef0b21a0"
+  },
+  "exit_code": 0
+}

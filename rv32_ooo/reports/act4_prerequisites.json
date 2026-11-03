@@ -1,0 +1,65 @@
+{
+  "checked_utc": "2026-11-02T09:51:25.532165+00:00",
+  "host": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "status": "act4_not_run",
+  "tools": {
+    "riscv32-unknown-elf-gcc": null,
+    "riscv64-unknown-elf-gcc": null,
+    "clang": "/usr/bin/clang",
+    "ld.lld": null,
+    "llvm-objcopy": null,
+    "sail_riscv_sim": null,
+    "riscv_sim_RV32": null,
+    "mise": null,
+    "uv": null,
+    "ruby": "/usr/bin/ruby",
+    "bundle": "/usr/bin/bundle",
+    "make": "/usr/bin/make",
+    "git": "/usr/bin/git",
+    "iverilog": "/opt/homebrew/bin/iverilog",
+    "vvp": "/opt/homebrew/bin/vvp",
+    "docker": "/usr/local/bin/docker"
+  },
+  "compiler": "/usr/bin/clang",
+  "suite_elfs_executed": 0,
+  "certification_claim": false,
+  "compiler_version": {
+    "returncode": 0,
+    "output": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin25.6.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n"
+  },
+  "rv32_assembler_probe": {
+    "returncode": 1,
+    "output": "clang (LLVM option parsing): Unknown command line argument '-riscv-add-build-attributes'.  Try: 'clang (LLVM option parsing) --help'\nclang (LLVM option parsing): Did you mean '--arm-add-build-attributes'?\n",
+    "object_produced": false,
+    "command_template": [
+      "/usr/bin/clang",
+      "--target=riscv32-unknown-elf",
+      "-march=rv32im_zicsr_zifencei",
+      "-mabi=ilp32",
+      "-c",
+      "probe.S",
+      "-o",
+      "probe.o"
+    ]
+  },
+  "docker_server_probe": {
+    "returncode": 1,
+    "output": "\nfailed to connect to the docker API at unix:///Users/prashant/.docker/run/docker.sock; check if the path is correct and if the daemon is running: dial unix /Users/prashant/.docker/run/docker.sock: connect: no such file or directory\n"
+  },
+  "docker_desktop_read_only_inspection": {
+    "installed": true,
+    "version": "4.92.0",
+    "launch_executable": "/Applications/Docker.app/Contents/MacOS/com.docker.backend",
+    "launch_executable_present": true,
+    "start_attempted_by_this_probe": false,
+    "successful_start_not_established_by_file_inspection": true
+  },
+  "act4_checkout": null,
+  "not_established": [
+    "Matching UDB/Sail/platform configuration validated against the chosen ACT4 revision",
+    "Compiler linker and reference model can build and run the applicable test suite",
+    "Every applicable self-checking ELF fits the fixed 64 KiB RAM",
+    "Complete upstream ACT4 platform configuration and console/interrupt hooks validated",
+    "ACT4 execution or architectural certification"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "block": 12,
+  "status": "passed",
+  "architecture_target": "two_issue_RV32IM_Zicsr_Zifencei",
+  "scope": "ordered memory queue and load/store request/response handling",
+  "checks": 1067,
+  "failures": 0,
+  "cases": [
+    {
+      "top": "tb_block12",
+      "scope": "ordered memory queue and load/store request/response handling",
+      "checks": 1067,
+      "failures": 0
+    }
+  ],
+  "simulator": "Icarus Verilog version 13.0 (stable) (v13_0)",
+  "sources_sha256": {
+    "rtl/rv32_load_store_unit.sv": "9716e35c962728528153e6698f87862957b750ef523ba147d0f4466bb5d2a685",
+    "rtl/rv32_ooo_pkg.sv": "d152eb7a58413148ed38bede06612267a76491d260e33a40cc6077732ce8860c",
+    "tb/tb_block12.sv": "2eb504f37dfdc9af26984960b1005b363a7d41809766084078b47ca610e0abb0"
+  },
+  "not_verified": [
+    "full-core memory integration or complete recovery",
+    "tests outside each case scope; official architectural certification",
+    "Vivado synthesis, implementation, or bitstream generation"
+  ]
+}

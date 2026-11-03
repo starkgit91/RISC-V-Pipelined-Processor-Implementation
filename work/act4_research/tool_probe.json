@@ -1,0 +1,15 @@
+{
+  "command": [
+    "clang",
+    "--target=riscv32-unknown-elf",
+    "-march=rv32im_zicsr_zifencei",
+    "-mabi=ilp32",
+    "-c",
+    "work/act4_research/probe.S",
+    "-o",
+    "work/act4_research/probe.o"
+  ],
+  "exit_code": 1,
+  "output": "clang (LLVM option parsing): Unknown command line argument '-riscv-add-build-attributes'.  Try: 'clang (LLVM option parsing) --help'\nclang (LLVM option parsing): Did you mean '--arm-add-build-attributes'?\n",
+  "object_exists": false
+}

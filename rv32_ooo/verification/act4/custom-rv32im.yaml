@@ -1,0 +1,79 @@
+# Adapted from riscv/riscv-arch-test SERV/Wally configuration parameter schemas.
+# Copyright (c) 2026, Harvey Mudd College
+# SPDX-License-Identifier: Apache-2.0
+# Describes the core and its restricted standalone ACT4 simulation platform.
+# Privileged tests are disabled by test_config.yaml; see README.md for limits.
+---
+$schema: config_schema.json#
+kind: architecture configuration
+type: fully configured
+name: custom-rv32im
+description: Custom RV32IM_Zicsr_Zifencei core, M-mode only, 64 KiB test RAM
+implemented_extensions:
+  - { name: I, version: "= 2.1" }
+  - { name: M, version: "= 2.0" }
+  - { name: Zmmul, version: "= 1.0.0" }
+  - { name: Zicsr, version: "= 2.0" }
+  - { name: Zifencei, version: "= 2.0" }
+  # Framework machine CSR/trap vocabulary, not a claim of full Sm certification.
+  - { name: Sm, version: "= 1.12.0" }
+params:
+  MXLEN: 32
+  PHYS_ADDR_WIDTH: 32
+  M_MODE_ENDIANNESS: little
+  NON_STANDARD_EXTENSION_IMPLEMENTED: false
+  MISA_CSR_IMPLEMENTED: true
+  MUTABLE_MISA_M: false
+  PRECISE_SYNCHRONOUS_EXCEPTIONS: true
+  TRAP_ON_ECALL_FROM_M: true
+  TRAP_ON_EBREAK: true
+  TRAP_ON_UNIMPLEMENTED_INSTRUCTION: true
+  TRAP_ON_RESERVED_INSTRUCTION: true
+  TRAP_ON_UNIMPLEMENTED_CSR: true
+  TRAP_ON_ILLEGAL_WLRL: false
+  REPORT_VA_IN_MTVAL_ON_BREAKPOINT: true
+  REPORT_VA_IN_MTVAL_ON_LOAD_MISALIGNED: true
+  REPORT_VA_IN_MTVAL_ON_STORE_AMO_MISALIGNED: true
+  REPORT_VA_IN_MTVAL_ON_INSTRUCTION_MISALIGNED: true
+  REPORT_VA_IN_MTVAL_ON_LOAD_ACCESS_FAULT: true
+  REPORT_VA_IN_MTVAL_ON_STORE_AMO_ACCESS_FAULT: true
+  REPORT_VA_IN_MTVAL_ON_INSTRUCTION_ACCESS_FAULT: true
+  REPORT_ENCODING_IN_MTVAL_ON_ILLEGAL_INSTRUCTION: true
+  MTVAL_WIDTH: 32
+  MISALIGNED_LDST: false
+  MISALIGNED_LDST_EXCEPTION_PRIORITY: high
+  # Zero means no architecture identity is supplied; the CSR still reads zero.
+  MARCHID_IMPLEMENTED: false
+  MIMPID_IMPLEMENTED: false
+  VENDOR_ID_BANK: 0
+  VENDOR_ID_OFFSET: 0
+  CONFIG_PTR_ADDRESS: 0
+  WFI_FINITE: false
+  WFI_U_MODE: false
+  PMA_GRANULARITY: 2
+  MTVEC_ACCESS: rw
+  MTVEC_MODES: [0, 1]
+  MTVEC_BASE_ALIGNMENT_DIRECT: 4
+  MTVEC_BASE_ALIGNMENT_VECTORED: 4
+  # Unsupported MODE encodings coerce to direct mode with the newly written base.
+  MTVEC_ILLEGAL_WRITE_BEHAVIOR: custom
+  # These ACT parameters describe interrupts the test platform can RAISE. The
+  # core has all three IRQ inputs, but tb_act4 ties them low and has no IRQ MMIO.
+  MTI_INTR_IMPL: false
+  MSI_INTR_IMPL: false
+  MEI_INTR_IMPL: false
+  NUM_PMP_ENTRIES: 0
+  # Machine mcycle/minstret exist; Zicntr user aliases and HPM3..31 do not.
+  HPM_COUNTER_EN: [false, false, false, false, false, false, false, false,
+                   false, false, false, false, false, false, false, false,
+                   false, false, false, false, false, false, false, false,
+                   false, false, false, false, false, false, false, false]
+  MCOUNTINHIBIT_IMPLEMENTED: true
+  COUNTINHIBIT_EN: [true, false, true, false, false, false, false, false,
+                    false, false, false, false, false, false, false, false,
+                    false, false, false, false, false, false, false, false,
+                    false, false, false, false, false, false, false, false]
+  MCOUNTENABLE_EN: [false, false, false, false, false, false, false, false,
+                    false, false, false, false, false, false, false, false,
+                    false, false, false, false, false, false, false, false,
+                    false, false, false, false, false, false, false, false]

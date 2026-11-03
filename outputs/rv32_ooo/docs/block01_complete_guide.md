@@ -27,6 +27,10 @@ valid/ready signals indicate when a record is meaningful and when it transfers.
 
 ## 2. Configuration and hardware dimensions
 
+The IF interface now includes a 64-bit fetch_row_t, a three-bit fetch_count_t for the four-entry
+instruction buffer, and paired prediction records. Shared RAM contains 8,192 64-bit instruction
+rows; the native row address is 13 bits. These types are implemented/tested in block 9.
+
 Five held completion sources (two integer, multiply/divide, later memory, later system) now
 share two registered writeback slots. Their packed completion_sources_t bundle uses independent
 valid/ready bits and does not change dispatch/retirement width.
@@ -291,6 +295,8 @@ package rv32_ooo_pkg;
   localparam int RETIRE_WIDTH     = 2;
   localparam int COMPLETION_SOURCE_COUNT = 5;
   localparam int XLEN             = 32;
+  localparam int FETCH_ROW_W      = FETCH_WIDTH * XLEN;
+  localparam int FETCH_ROW_BYTES  = FETCH_ROW_W / 8;
   localparam int ARCH_REG_COUNT   = 32;
   localparam int PHYS_REG_COUNT   = 64;
   localparam int ROB_DEPTH        = 16;
@@ -307,6 +313,7 @@ package rv32_ooo_pkg;
   localparam int PHT_INDEX_W      = $clog2(PHT_ENTRIES);
 
   typedef logic [XLEN-1:0]           word_t;
+  typedef logic [FETCH_ROW_W-1:0]    fetch_row_t;
   typedef logic [ARCH_REG_W-1:0]     arch_reg_t;
   typedef logic [PHYS_REG_W-1:0]     phys_reg_t;
   typedef logic [PHYS_REG_COUNT-1:0] phys_mask_t;
@@ -314,6 +321,7 @@ package rv32_ooo_pkg;
   typedef logic [ROB_INDEX_W-1:0] rob_index_t;
   typedef logic [$clog2(ROB_DEPTH+1)-1:0] rob_count_t;
   typedef logic [$clog2(ISSUE_DEPTH+1)-1:0] issue_count_t;
+  typedef logic [$clog2(FETCH_DEPTH+1)-1:0] fetch_count_t;
   typedef logic [11:0]               csr_addr_t;
   typedef logic [PHT_INDEX_W-1:0]    pht_index_t;
 
@@ -328,6 +336,8 @@ package rv32_ooo_pkg;
   localparam word_t RAM_BASE       = 32'h0000_0000;
   localparam int RAM_BYTES         = 65_536;
   localparam int RAM_WORDS         = RAM_BYTES / (XLEN / 8);
+  localparam int RAM_FETCH_ROWS    = RAM_BYTES / FETCH_ROW_BYTES;
+  localparam int BRAM_FETCH_ADDR_W = $clog2(RAM_FETCH_ROWS);
   localparam word_t TIMER_BASE     = 32'h0200_0000;
   localparam word_t UART_BASE      = 32'h1000_0000;
   localparam word_t GPIO_BASE      = 32'h1001_0000;
@@ -443,6 +453,11 @@ package rv32_ooo_pkg;
     logic       btb_hit;
     pht_index_t pht_index;
   } prediction_t;
+
+  typedef struct packed {
+    prediction_t lane1;
+    prediction_t lane0;
+  } prediction_pair_t;
 
   // IF -> ID. A fetch fault travels with the instruction and is not executed.
   // Handshake valid/ready signals belong to the owning interface, outside this payload.

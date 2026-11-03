@@ -1,0 +1,34 @@
+{
+  "checked_utc": "2026-11-02T15:38:39.271519+00:00",
+  "status": "container_tools_and_config_validated",
+  "upstream_revision": "2dc36dd2f3d25383039effa10f1a3930a78a945a",
+  "base_image": "ghcr.io/riscv/act4-build@sha256:6fdbb2a5acadd6e9a3aecf8081bc73d25f1e50e55ae8d23dbec03ec0959e9c0f",
+  "added_reference_model": "Sail 0.16 Linux aarch64",
+  "sail_release_sha256": "92163c1b02b416ae6a031283e0b2085674daed5dfa2d79b1c929ef23da51da73",
+  "solver": {
+    "release": "z3-5.1.0",
+    "bytes": 33018960,
+    "sha256": "37d7c31f0fec4c83c4a8f2f34f6cd5e91b3f277e78674ba81245bab9513df332",
+    "matches_github_release_digest_and_checksum_file": true,
+    "truncated_first_download_rejected": true
+  },
+  "sail_configuration_validation": "passed",
+  "udb_configuration_validation": "passed",
+  "configuration_sha256": {
+    "verification/act4/rvmodel_macros.h": "3b847b8574d0a873349a738e323d5de35c5701faf7c14b5ce31e7159c8071f21",
+    "verification/act4/test_config.yaml": "c6288358fd65f1771d3438d56b50b4862d98c2a29f3edf50f63692c62c784cda",
+    "verification/act4/custom-rv32im.yaml": "7334fe9d5944b271350771ae53f1b23145c657d3ae51bd0f87f5b421f5ea1183",
+    "verification/act4/COPYING.APACHE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "verification/act4/link.ld": "bcd2fe7e585f3651840c7bac7221a45ef45f6daa08408b45d023d2ad7c63e5cd",
+    "verification/act4/README.md": "480cc8e3db7e4f2fd5f68f0d5f718374009433569bdd8f65c83d2eac5e5f1657",
+    "verification/act4/sail.json": "1bb28bc9a49456300849bf88d0fca72d4a1d74cc26c1666511fec65ed1bf2c5d"
+  },
+  "original_build": {
+    "requested_programs": 54,
+    "final_elfs_built": 23,
+    "programs_requiring_split_for_64_KiB": 31,
+    "log": "reports/act4_original_build.log"
+  },
+  "official_dut_execution": "not yet run; original ELF flag rejection and regeneration are separate from DUT failures",
+  "certification_claim": false
+}

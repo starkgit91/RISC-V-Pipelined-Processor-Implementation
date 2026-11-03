@@ -15,7 +15,7 @@
   ],
   "simulator": "Icarus Verilog version 13.0 (stable) (v13_0)",
   "sources_sha256": {
-    "rtl/rv32_ooo_pkg.sv": "601cd92ff07046485c0499e6626330eb44384c37e9b0310c081d5f498ebc2f43",
+    "rtl/rv32_ooo_pkg.sv": "d152eb7a58413148ed38bede06612267a76491d260e33a40cc6077732ce8860c",
     "rtl/rv32_physical_regfile.sv": "161392e71a66f32e250b768c71e004e1001d917ef18647b72453144b0c23c033",
     "tb/tb_block03.sv": "4e174a58856d47215bd66df5c591bdcc243ea8532c27df7ace232c8bee549cbf"
   },
@@ -24,7 +24,7 @@
     "ROB tag validation or completion arbitration",
     "committed register maps or retirement",
     "FPGA resource mapping or timing",
-    "complete processor, AXI, interrupts, or firmware",
+    "tests outside each case scope; official architectural certification",
     "Vivado synthesis, implementation, or bitstream generation"
   ]
 }

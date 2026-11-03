@@ -1,0 +1,49 @@
+{
+  "checked_utc": "2026-11-02T09:51:19.508871+00:00",
+  "status": "docker_engine_unavailable",
+  "image_pulled": false,
+  "configuration_changed": false,
+  "license_or_prompt_accepted": false,
+  "attempts": [
+    {
+      "command": [
+        "open",
+        "-gja",
+        "Docker"
+      ],
+      "exit_code": 1,
+      "output": "Unable to find application named 'Docker'"
+    },
+    {
+      "command": [
+        "open",
+        "-gja",
+        "/Applications/Docker.app"
+      ],
+      "exit_code": 1,
+      "output": "NSOSStatusErrorDomain Code=-10827 kLSNoExecutableErr: The executable is missing"
+    },
+    {
+      "command": [
+        "docker",
+        "desktop",
+        "start",
+        "--timeout",
+        "15"
+      ],
+      "exit_code": 1,
+      "output": "App-container docker-desktop.log: operation not permitted. Failed to start Docker Desktop: still starting, context deadline exceeded."
+    }
+  ],
+  "final_daemon_probe": {
+    "command": [
+      "docker",
+      "version",
+      "--format",
+      "{{.Server.Version}}"
+    ],
+    "exit_code": 1,
+    "output": "\nfailed to connect to the docker API at unix:///Users/prashant/.docker/run/docker.sock; check if the path is correct and if the daemon is running: dial unix /Users/prashant/.docker/run/docker.sock: connect: no such file or directory\n"
+  },
+  "official_image_size_not_established": true
+}

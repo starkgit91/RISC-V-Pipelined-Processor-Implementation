@@ -1,0 +1,30 @@
+{
+  "block": 3,
+  "status": "passed",
+  "architecture_target": "two_issue_RV32IM_Zicsr_Zifencei",
+  "scope": "four PRF reads, two writes, p0 protection, dual completion bypass",
+  "checks": 155389,
+  "failures": 0,
+  "cases": [
+    {
+      "top": "tb_block03",
+      "scope": "four PRF reads, two writes, p0 protection, dual completion bypass",
+      "checks": 155389,
+      "failures": 0
+    }
+  ],
+  "simulator": "Icarus Verilog version 13.0 (stable) (v13_0)",
+  "sources_sha256": {
+    "rtl/rv32_ooo_pkg.sv": "d152eb7a58413148ed38bede06612267a76491d260e33a40cc6077732ce8860c",
+    "rtl/rv32_physical_regfile.sv": "161392e71a66f32e250b768c71e004e1001d917ef18647b72453144b0c23c033",
+    "tb/tb_block03.sv": "4e174a58856d47215bd66df5c591bdcc243ea8532c27df7ace232c8bee549cbf"
+  },
+  "not_verified": [
+    "rename allocation or readiness tracking",
+    "ROB tag validation or completion arbitration",
+    "committed register maps or retirement",
+    "FPGA resource mapping or timing",
+    "tests outside each case scope; official architectural certification",
+    "Vivado synthesis, implementation, or bitstream generation"
+  ]
+}

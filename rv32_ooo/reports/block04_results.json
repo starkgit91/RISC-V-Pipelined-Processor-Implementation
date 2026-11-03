@@ -1,0 +1,30 @@
+{
+  "block": 4,
+  "status": "passed",
+  "architecture_target": "two_issue_RV32IM_Zicsr_Zifencei",
+  "scope": "two-wide rename, intra-pair dependencies, dual completion/retirement, recovery",
+  "checks": 155233,
+  "failures": 0,
+  "cases": [
+    {
+      "top": "tb_block04",
+      "scope": "two-wide rename, intra-pair dependencies, dual completion/retirement, recovery",
+      "checks": 155233,
+      "failures": 0
+    }
+  ],
+  "simulator": "Icarus Verilog version 13.0 (stable) (v13_0)",
+  "sources_sha256": {
+    "rtl/rv32_ooo_pkg.sv": "d152eb7a58413148ed38bede06612267a76491d260e33a40cc6077732ce8860c",
+    "rtl/rv32_rename.sv": "f0d133b2ac2be3c73cfd37a6e21b6add4f7cf23728d8e1638217a8da4668f107",
+    "tb/tb_block04.sv": "bee7e52bea7adbb483baf1f2a724e38834faa1cf4a1f82abd11e20ec8d2faa46"
+  },
+  "not_verified": [
+    "ROB controller and issue scheduling",
+    "completion ownership validation",
+    "execution cancellation or recovery quiescence detection",
+    "physical result values or complete processor execution",
+    "tests outside each case scope; official architectural certification",
+    "Vivado synthesis, implementation, or bitstream generation"
+  ]
+}

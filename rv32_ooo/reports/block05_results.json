@@ -1,0 +1,40 @@
+{
+  "block": 5,
+  "status": "passed",
+  "architecture_target": "two_issue_RV32IM_Zicsr_Zifencei",
+  "scope": "two-wide ROB ownership, ordered retirement/traps, recovery lock, registered trace",
+  "checks": 18611,
+  "failures": 0,
+  "cases": [
+    {
+      "top": "tb_block05",
+      "scope": "two-wide ROB ownership, ordered retirement/traps, recovery lock, registered trace",
+      "checks": 18573,
+      "failures": 0
+    },
+    {
+      "top": "tb_block05_integration",
+      "scope": "connected rename/ROB/PRF/trace handshakes with injected completion values",
+      "checks": 38,
+      "failures": 0
+    }
+  ],
+  "simulator": "Icarus Verilog version 13.0 (stable) (v13_0)",
+  "sources_sha256": {
+    "rtl/rv32_ooo_pkg.sv": "d152eb7a58413148ed38bede06612267a76491d260e33a40cc6077732ce8860c",
+    "rtl/rv32_physical_regfile.sv": "161392e71a66f32e250b768c71e004e1001d917ef18647b72453144b0c23c033",
+    "rtl/rv32_rename.sv": "f0d133b2ac2be3c73cfd37a6e21b6add4f7cf23728d8e1638217a8da4668f107",
+    "rtl/rv32_reorder_buffer.sv": "ad2f5c007f5c00b5c7e4836eed5e86c7dc9d25117ed9eda60d91ac7f3ea80726",
+    "rtl/rv32_trace_recorder.sv": "1cd5551b346a2b6b8fed9412d3312c8ca908d3f9aa69fb020014f8bd740c3af2",
+    "tb/tb_block05.sv": "f5e622fefc19f04fdf1101c8cc603f386e9e7cff58e403b88141b7d0777c23f7",
+    "tb/tb_block05_integration.sv": "4044e11070d9b9d4c84a4c1a7de614c50a9a067e6a6b3b96f587883929660f35"
+  },
+  "not_verified": [
+    "actual DIV/ADD execution or issue scheduling",
+    "CSR/interrupt state updates",
+    "execution cancellation and fetch redirection",
+    "AXI memory effects",
+    "tests outside each case scope; official architectural certification",
+    "Vivado synthesis, implementation, or bitstream generation"
+  ]
+}

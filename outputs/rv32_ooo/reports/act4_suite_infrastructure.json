@@ -1,0 +1,876 @@
+{
+  "schema_version": 1,
+  "scope": "synthetic_batch_runner_infrastructure_smoke",
+  "created_utc": "2026-11-02T15:32:00.330541+00:00",
+  "status": "all_infrastructure_expectations_matched",
+  "synthetic_inputs": true,
+  "official_act4_elfs_executed": 0,
+  "certification_claim": false,
+  "note": "This verifies sequential/default and parallel runner accounting, execution/rejection paths and manifest integrity checks using locally encoded fixtures. It is not an official ACT4 suite result. --jobs 2 preserves all four mixed outcomes and logs.",
+  "fixture_construction": "run_act4.minimal_elf(0x1000fff0); FAIL replaces instruction word 2 with 0x00200113; TIMEOUT replaces it with 0x00000113; oversize sets PT_LOAD p_memsz to 65537. Full ELF bytes are retained below.",
+  "tested_final_runner_sha256": "d92ee28e7a5ebbdca18ed713f8703c00df39ac69c374cefbb81b18a2e26e0aa5",
+  "source_sha256": {
+    "rtl/rv32_ooo_pkg.sv": "d152eb7a58413148ed38bede06612267a76491d260e33a40cc6077732ce8860c",
+    "rtl/rv32_alu.sv": "ede6c6ba45722ab58a791ce606bf959ab619fcb8958abd68e5968a3321901c27",
+    "rtl/rv32_axi_lite_master.sv": "270aab8128f7493ce4650d4451d5ae8709d912eaf390090559e3798957c3e380",
+    "rtl/rv32_branch_compare.sv": "00c8c76aa56fc66a3b6b358219a5eb5aebd61f146ff758b4846e0a0f06ae1f9d",
+    "rtl/rv32_branch_predictor.sv": "f93a2a96c7755ad1709bf0b6ecdd67c5f42f6849f0a4231e07772bef8a74a980",
+    "rtl/rv32_completion_arbiter.sv": "1dde8d9402159ca727094392dd4be64d4b631ccee040623def3c40d0226cc807",
+    "rtl/rv32_csr_file.sv": "6321c25fddb848a73832d183a0054db1c7d42f321ac34cf50aa9c471a265764b",
+    "rtl/rv32_decoder.sv": "aa03431c324e7395562b9ce80477c5da30de4dc89f4beebd16a2c6f0502b34bb",
+    "rtl/rv32_execution_cluster.sv": "f0ed98e0d53bde647ec81fc17b5747c43b50cce7402e3de9788a043bbd835523",
+    "rtl/rv32_fetch.sv": "9137e1443fc3875775921f29a3614d183447581feec17955c4cb85184a71c497",
+    "rtl/rv32_instruction_adapter.sv": "9d6beedc6d7475956cfb6c4816d873c73202427f4bb8e57f859454239c8a0844",
+    "rtl/rv32_integer_execute.sv": "de3e602097f5ae2afecc42b27d833bba7267d27ae9cf612aecaf2814a6fd3fcf",
+    "rtl/rv32_issue_queue.sv": "4de94e7ce32c9e1939e03202031874facfc5b770ee2c84a72d3e1c9bb765b29d",
+    "rtl/rv32_load_store_unit.sv": "9716e35c962728528153e6698f87862957b750ef523ba147d0f4466bb5d2a685",
+    "rtl/rv32_machine_timer.sv": "beb7caa9c569ef701e560ad6b6a1a807da6fa64d351ef20ed073dc760c019e8f",
+    "rtl/rv32_muldiv_execute.sv": "5c8380a195242cd78f8172792ee04c0e67fd744b42836ba7733a3455d19a9e14",
+    "rtl/rv32_ooo_axi_top.sv": "ef76a919c2b56c5e9d18b8ba53f69cfc12181e9d244d455fa4a32c8507a7d45d",
+    "rtl/rv32_ooo_core.sv": "5ecc0c846eb6d647fad9df9d3027e828f8b048eabdf912bf5c47a31790c4d2d3",
+    "rtl/rv32_physical_regfile.sv": "161392e71a66f32e250b768c71e004e1001d917ef18647b72453144b0c23c033",
+    "rtl/rv32_recovery_controller.sv": "017d3f88576191f446a757028c6d155cb501e9a1716d34c44da52d9cf483be4e",
+    "rtl/rv32_rename.sv": "f0d133b2ac2be3c73cfd37a6e21b6add4f7cf23728d8e1638217a8da4668f107",
+    "rtl/rv32_reorder_buffer.sv": "ad2f5c007f5c00b5c7e4836eed5e86c7dc9d25117ed9eda60d91ac7f3ea80726",
+    "rtl/rv32_trace_recorder.sv": "1cd5551b346a2b6b8fed9412d3312c8ca908d3f9aa69fb020014f8bd740c3af2",
+    "rtl/rv32_writeback.sv": "45a844ddada1c304c725855a2645c883c27a755fa3f19c3e2ed2bf534eaa8d17",
+    "tb/tb_act4.sv": "102851117fe1d94240e9eedefe99b5dff0986cc56cb49cb678b58bb9409692a7",
+    "scripts/act4_elf_to_mem.py": "1e827f2f883a077c3351d2e1f5704bc8adf1770e8c0851ab4ce873b9b75b7225",
+    "scripts/run_act4_suite.py": "d92ee28e7a5ebbdca18ed713f8703c00df39ac69c374cefbb81b18a2e26e0aa5"
+  },
+  "tool_versions": {
+    "iverilog": {
+      "command": [
+        "/opt/homebrew/bin/iverilog",
+        "-V"
+      ],
+      "exit_code": 0,
+      "host_timeout": false,
+      "log": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed/run-20261102T153159104426Z/iverilog_version.log",
+      "log_sha256": "ca23091099109d3237b10e6336dbb5b325dda94c3c52cd4111d924bd60227f5d",
+      "text": "Icarus Verilog version 13.0 (stable) (v13_0)\n\nCopyright (c) 2000-2026 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n\nIcarus Verilog Preprocessor version 13.0 (stable) (v13_0)\n\nCopyright (c) 1999-2026 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n\nIcarus Verilog Parser/Elaborator version 13.0 (stable) (v13_0)\n\nCopyright (c) 1998-2026 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n\n FLAGS DLL vvp.tgt\nvvp.tgt: Icarus Verilog VVP Code Generator 13.0 (stable) (v13_0)\n\nCopyright (c) 2001-2026 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA."
+    },
+    "vvp": {
+      "command": [
+        "/opt/homebrew/bin/vvp",
+        "-V"
+      ],
+      "exit_code": 0,
+      "host_timeout": false,
+      "log": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed/run-20261102T153159104426Z/vvp_version.log",
+      "log_sha256": "60359f21f36fe47d30e34fd6e00eb24640751c19101c3cc107d31be3e56d46d6",
+      "text": "Icarus Verilog runtime version 13.0 (stable) (v13_0)\n\nCopyright (c) 2001-2026 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA."
+    },
+    "python": "3.14.7 (main, Aug  5 2026, 10:29:49) [Clang 21.0.0 (clang-2100.1.1.101)]"
+  },
+  "fixtures": {
+    "fail.elf": {
+      "elf_bytes_hex": "7f454c460101010000000000000000000200f30001000000000000003400000000000000000000003400200001000000000000000100000054000000000000000000000014000000140000000500000001000000b7000110938000ff1301200023a020006f000000",
+      "sha256": "17026980db15395c3850b9c4ba2711cc9aa4afe33863d48b4bf428c1287632dc",
+      "bytes": 104
+    },
+    "oversize.elf": {
+      "elf_bytes_hex": "7f454c460101010000000000000000000200f30001000000000000003400000000000000000000003400200001000000000000000100000054000000000000000000000014000000010001000500000001000000b7000110938000ff1301100023a020006f000000",
+      "sha256": "b6a83ae4bb8456968e581a744124c6196622f52fa90e4775687aa6c9b069bdc9",
+      "bytes": 104
+    },
+    "pass.elf": {
+      "elf_bytes_hex": "7f454c460101010000000000000000000200f30001000000000000003400000000000000000000003400200001000000000000000100000054000000000000000000000014000000140000000500000001000000b7000110938000ff1301100023a020006f000000",
+      "sha256": "90f857fe07a41c7abbb8d2b89b65aed01fa3e16c2c07ed73f6837ab23325c0ea",
+      "bytes": 104
+    },
+    "timeout.elf": {
+      "elf_bytes_hex": "7f454c460101010000000000000000000200f30001000000000000003400000000000000000000003400200001000000000000000100000054000000000000000000000014000000140000000500000001000000b7000110938000ff1301000023a020006f000000",
+      "sha256": "d281b74dff9a81e5033ea1a0056f1c2eb5a207f696b68a8756aca2134a016ea2",
+      "bytes": 104
+    }
+  },
+  "runs": [
+    {
+      "name": "parallel_mixed",
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/scripts/run_act4_suite.py",
+        "--elf-dir",
+        "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_inputs/mixed",
+        "--max-cycles",
+        "200",
+        "--data-latency",
+        "2",
+        "--predict",
+        "1",
+        "--wall-timeout",
+        "120",
+        "--output-dir",
+        "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed",
+        "--jobs",
+        "2"
+      ],
+      "expected_exit_code": 1,
+      "exit_code": 1,
+      "expected_counts": {
+        "passed": 1,
+        "failed": 1,
+        "conversion_failed": 1,
+        "timeout": 1,
+        "total": 4
+      },
+      "counts": {
+        "passed": 1,
+        "failed": 1,
+        "conversion_failed": 1,
+        "timeout": 1,
+        "total": 4
+      },
+      "expected_provenance": "provenance_not_verified",
+      "provenance": {
+        "status": "provenance_not_verified",
+        "manifest": null,
+        "errors": [],
+        "reason": "No build manifest supplied; ELF origin is not verified."
+      },
+      "status": "failed",
+      "configuration": {
+        "tohost": "0x1000fff0",
+        "max_cycles": 200,
+        "data_latency": 2,
+        "predict": 1,
+        "wall_timeout_seconds": 120.0,
+        "jobs": 2
+      },
+      "execution": {
+        "compile_invocations": 1,
+        "worker_model": "ThreadPoolExecutor",
+        "report_order": "sorted relative input filename"
+      },
+      "errors": [],
+      "compile": {
+        "command": [
+          "iverilog",
+          "-g2012",
+          "-s",
+          "tb_act4",
+          "-o",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed/run-20261102T153159104426Z/tb_act4.vvp",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_ooo_pkg.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_alu.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_axi_lite_master.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_branch_compare.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_branch_predictor.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_completion_arbiter.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_csr_file.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_decoder.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_execution_cluster.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_fetch.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_instruction_adapter.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_integer_execute.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_issue_queue.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_load_store_unit.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_machine_timer.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_muldiv_execute.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_ooo_axi_top.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_ooo_core.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_physical_regfile.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_recovery_controller.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_rename.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_reorder_buffer.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_trace_recorder.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_writeback.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/tb/tb_act4.sv"
+        ],
+        "exit_code": 0,
+        "host_timeout": false,
+        "log": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed/run-20261102T153159104426Z/compile.log",
+        "log_sha256": "8144e4db295dac5d6b8a7afae4a11905fadd001036da0a2668c59941b5badf73"
+      },
+      "cases": [
+        {
+          "name": "fail.elf",
+          "elf": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_inputs/mixed/fail.elf",
+          "directory": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed/run-20261102T153159104426Z/00000_fail",
+          "status": "failed",
+          "stage": "simulation",
+          "elf_sha256": "17026980db15395c3850b9c4ba2711cc9aa4afe33863d48b4bf428c1287632dc",
+          "elf_bytes": 104,
+          "conversion": {
+            "command": [
+              "/opt/homebrew/opt/python@3.14/bin/python3.14",
+              "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/scripts/act4_elf_to_mem.py",
+              "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_inputs/mixed/fail.elf",
+              "--words",
+              "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed/run-20261102T153159104426Z/00000_fail/image.words.hex",
+              "--rows",
+              "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed/run-20261102T153159104426Z/00000_fail/image.rows.hex",
+              "--report",
+              "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed/run-20261102T153159104426Z/00000_fail/load.json"
+            ],
+            "exit_code": 0,
+            "host_timeout": false,
+            "log": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed/run-20261102T153159104426Z/00000_fail/conversion.log",
+            "log_sha256": "e98a632942af4d1ec5945c8e114712301c4dfb6b8b8a5234a199604fd5608c1d"
+          },
+          "load_report": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed/run-20261102T153159104426Z/00000_fail/load.json",
+          "rows_sha256": "c7cc0b0035a81ccfb4636e0f2f3ed4db8d83368d4d769c7bde8e66a2fb3ddb9f",
+          "summary": [
+            "ACT4_HARNESS FAIL code=00000002 cycles=18 retired=4"
+          ],
+          "simulation": {
+            "command": [
+              "vvp",
+              "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed/run-20261102T153159104426Z/tb_act4.vvp",
+              "+imem=/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed/run-20261102T153159104426Z/00000_fail/image.rows.hex",
+              "+tohost=1000fff0",
+              "+max_cycles=200",
+              "+data_latency=2",
+              "+predict=1"
+            ],
+            "exit_code": 1,
+            "host_timeout": false,
+            "log": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed/run-20261102T153159104426Z/00000_fail/simulation.log",
+            "log_sha256": "87a79b4364c33950d754d3eaff99bd4c92c3dc7b5c3381489c0f4e46b8252fb6"
+          }
+        },
+        {
+          "name": "oversize.elf",
+          "elf": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_inputs/mixed/oversize.elf",
+          "directory": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed/run-20261102T153159104426Z/00001_oversize",
+          "status": "conversion_failed",
+          "stage": "conversion",
+          "elf_sha256": "b6a83ae4bb8456968e581a744124c6196622f52fa90e4775687aa6c9b069bdc9",
+          "elf_bytes": 104,
+          "conversion": {
+            "command": [
+              "/opt/homebrew/opt/python@3.14/bin/python3.14",
+              "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/scripts/act4_elf_to_mem.py",
+              "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_inputs/mixed/oversize.elf",
+              "--words",
+              "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed/run-20261102T153159104426Z/00001_oversize/image.words.hex",
+              "--rows",
+              "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed/run-20261102T153159104426Z/00001_oversize/image.rows.hex",
+              "--report",
+              "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed/run-20261102T153159104426Z/00001_oversize/load.json"
+            ],
+            "exit_code": 1,
+            "host_timeout": false,
+            "log": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed/run-20261102T153159104426Z/00001_oversize/conversion.log",
+            "log_sha256": "c53208004c8b7ac07098e00e0e694a6300159a6a84c2be8fe51e98019f9207be"
+          }
+        },
+        {
+          "name": "pass.elf",
+          "elf": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_inputs/mixed/pass.elf",
+          "directory": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed/run-20261102T153159104426Z/00002_pass",
+          "status": "passed",
+          "stage": "simulation",
+          "elf_sha256": "90f857fe07a41c7abbb8d2b89b65aed01fa3e16c2c07ed73f6837ab23325c0ea",
+          "elf_bytes": 104,
+          "conversion": {
+            "command": [
+              "/opt/homebrew/opt/python@3.14/bin/python3.14",
+              "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/scripts/act4_elf_to_mem.py",
+              "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_inputs/mixed/pass.elf",
+              "--words",
+              "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed/run-20261102T153159104426Z/00002_pass/image.words.hex",
+              "--rows",
+              "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed/run-20261102T153159104426Z/00002_pass/image.rows.hex",
+              "--report",
+              "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed/run-20261102T153159104426Z/00002_pass/load.json"
+            ],
+            "exit_code": 0,
+            "host_timeout": false,
+            "log": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed/run-20261102T153159104426Z/00002_pass/conversion.log",
+            "log_sha256": "58dce2dcc126436149f411a13771670fb1475aec7b6d43035dd5e2120d1f166b"
+          },
+          "load_report": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed/run-20261102T153159104426Z/00002_pass/load.json",
+          "rows_sha256": "713b0021f01263173f2a1eb0e48b2cf58e1fa10fd64599a814a65f4da6300126",
+          "summary": [
+            "ACT4_HARNESS PASS cycles=18 retired=4 traps=0 stores=1/1"
+          ],
+          "simulation": {
+            "command": [
+              "vvp",
+              "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed/run-20261102T153159104426Z/tb_act4.vvp",
+              "+imem=/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed/run-20261102T153159104426Z/00002_pass/image.rows.hex",
+              "+tohost=1000fff0",
+              "+max_cycles=200",
+              "+data_latency=2",
+              "+predict=1"
+            ],
+            "exit_code": 0,
+            "host_timeout": false,
+            "log": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed/run-20261102T153159104426Z/00002_pass/simulation.log",
+            "log_sha256": "d48fddb5375150e6ea88629c76fd3cca7bec23a9f6f83df3b43bbbbee7b7c56c"
+          }
+        },
+        {
+          "name": "timeout.elf",
+          "elf": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_inputs/mixed/timeout.elf",
+          "directory": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed/run-20261102T153159104426Z/00003_timeout",
+          "status": "timeout",
+          "stage": "simulation",
+          "elf_sha256": "d281b74dff9a81e5033ea1a0056f1c2eb5a207f696b68a8756aca2134a016ea2",
+          "elf_bytes": 104,
+          "conversion": {
+            "command": [
+              "/opt/homebrew/opt/python@3.14/bin/python3.14",
+              "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/scripts/act4_elf_to_mem.py",
+              "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_inputs/mixed/timeout.elf",
+              "--words",
+              "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed/run-20261102T153159104426Z/00003_timeout/image.words.hex",
+              "--rows",
+              "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed/run-20261102T153159104426Z/00003_timeout/image.rows.hex",
+              "--report",
+              "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed/run-20261102T153159104426Z/00003_timeout/load.json"
+            ],
+            "exit_code": 0,
+            "host_timeout": false,
+            "log": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed/run-20261102T153159104426Z/00003_timeout/conversion.log",
+            "log_sha256": "822d45111d3e2e080e5ec2c16ea4339cbe3057017198d6c7f0516a9a3473dc5d"
+          },
+          "load_report": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed/run-20261102T153159104426Z/00003_timeout/load.json",
+          "rows_sha256": "e3cf949df3f788089f1625ea6329c07988ad664a1782eb43be1c3f541fc447c7",
+          "summary": [
+            "ACT4_HARNESS TIMEOUT cycles=200 retired=178 traps=0"
+          ],
+          "simulation": {
+            "command": [
+              "vvp",
+              "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed/run-20261102T153159104426Z/tb_act4.vvp",
+              "+imem=/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed/run-20261102T153159104426Z/00003_timeout/image.rows.hex",
+              "+tohost=1000fff0",
+              "+max_cycles=200",
+              "+data_latency=2",
+              "+predict=1"
+            ],
+            "exit_code": 1,
+            "host_timeout": false,
+            "log": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_parallel_mixed/run-20261102T153159104426Z/00003_timeout/simulation.log",
+            "log_sha256": "c8108493644208953459075b33ad90d95095cf38691cc1ebea1db39f0eb7c66c"
+          }
+        }
+      ],
+      "checks": {
+        "expected_process_exit": true,
+        "expected_inventory_counts": true,
+        "expected_provenance_label": true,
+        "exact_final_runner_hash": true,
+        "no_certification_claim": true,
+        "compile_succeeded": true,
+        "one_shared_compile": true,
+        "worker_count_matches": true,
+        "sorted_report_order": true,
+        "every_input_counted": true,
+        "four_parallel_outcomes_preserved": true,
+        "per_case_logs_intact": true
+      },
+      "origin_report": "build/act4_suite_smoke_parallel_mixed/results.json",
+      "origin_report_sha256": "f88528b226c6623f06449d130cad8f1bd9eed6328c9bd7555f32efe9338f3ec1"
+    },
+    {
+      "name": "manifest",
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/scripts/run_act4_suite.py",
+        "--elf-dir",
+        "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_inputs/pass",
+        "--max-cycles",
+        "200",
+        "--data-latency",
+        "2",
+        "--predict",
+        "1",
+        "--wall-timeout",
+        "120",
+        "--output-dir",
+        "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_manifest",
+        "--manifest",
+        "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_inputs/pass/manifest.json"
+      ],
+      "expected_exit_code": 0,
+      "exit_code": 0,
+      "expected_counts": {
+        "passed": 1,
+        "failed": 0,
+        "conversion_failed": 0,
+        "timeout": 0,
+        "total": 1
+      },
+      "counts": {
+        "passed": 1,
+        "failed": 0,
+        "conversion_failed": 0,
+        "timeout": 0,
+        "total": 1
+      },
+      "expected_provenance": "manifest_inventory_verified",
+      "provenance": {
+        "status": "manifest_inventory_verified",
+        "manifest": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_inputs/pass/manifest.json",
+        "errors": [],
+        "manifest_sha256": "44bafa31c79bf02f4c37c84438bcde0a35be85068056bd2c0c23d7d921801850",
+        "upstream_revision": "synthetic-smoke-fixtures-not-upstream",
+        "config": {
+          "source": "locally encoded harness examples"
+        },
+        "note": "Inventory integrity verified; upstream authenticity and architectural certification are not established."
+      },
+      "status": "all_input_programs_reported_pass",
+      "configuration": {
+        "tohost": "0x1000fff0",
+        "max_cycles": 200,
+        "data_latency": 2,
+        "predict": 1,
+        "wall_timeout_seconds": 120.0,
+        "jobs": 1
+      },
+      "execution": {
+        "compile_invocations": 1,
+        "worker_model": "ThreadPoolExecutor",
+        "report_order": "sorted relative input filename"
+      },
+      "errors": [],
+      "compile": {
+        "command": [
+          "iverilog",
+          "-g2012",
+          "-s",
+          "tb_act4",
+          "-o",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_manifest/run-20261102T153159784083Z/tb_act4.vvp",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_ooo_pkg.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_alu.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_axi_lite_master.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_branch_compare.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_branch_predictor.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_completion_arbiter.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_csr_file.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_decoder.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_execution_cluster.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_fetch.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_instruction_adapter.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_integer_execute.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_issue_queue.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_load_store_unit.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_machine_timer.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_muldiv_execute.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_ooo_axi_top.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_ooo_core.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_physical_regfile.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_recovery_controller.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_rename.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_reorder_buffer.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_trace_recorder.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_writeback.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/tb/tb_act4.sv"
+        ],
+        "exit_code": 0,
+        "host_timeout": false,
+        "log": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_manifest/run-20261102T153159784083Z/compile.log",
+        "log_sha256": "8144e4db295dac5d6b8a7afae4a11905fadd001036da0a2668c59941b5badf73"
+      },
+      "cases": [
+        {
+          "name": "pass.elf",
+          "elf": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_inputs/pass/pass.elf",
+          "directory": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_manifest/run-20261102T153159784083Z/00000_pass",
+          "status": "passed",
+          "stage": "simulation",
+          "elf_sha256": "90f857fe07a41c7abbb8d2b89b65aed01fa3e16c2c07ed73f6837ab23325c0ea",
+          "elf_bytes": 104,
+          "conversion": {
+            "command": [
+              "/opt/homebrew/opt/python@3.14/bin/python3.14",
+              "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/scripts/act4_elf_to_mem.py",
+              "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_inputs/pass/pass.elf",
+              "--words",
+              "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_manifest/run-20261102T153159784083Z/00000_pass/image.words.hex",
+              "--rows",
+              "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_manifest/run-20261102T153159784083Z/00000_pass/image.rows.hex",
+              "--report",
+              "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_manifest/run-20261102T153159784083Z/00000_pass/load.json"
+            ],
+            "exit_code": 0,
+            "host_timeout": false,
+            "log": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_manifest/run-20261102T153159784083Z/00000_pass/conversion.log",
+            "log_sha256": "7e5b5b0320b36c0d2a6859b264549b6665d18bfc26d3a06f8c90b4aa6896f535"
+          },
+          "load_report": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_manifest/run-20261102T153159784083Z/00000_pass/load.json",
+          "rows_sha256": "713b0021f01263173f2a1eb0e48b2cf58e1fa10fd64599a814a65f4da6300126",
+          "summary": [
+            "ACT4_HARNESS PASS cycles=18 retired=4 traps=0 stores=1/1"
+          ],
+          "simulation": {
+            "command": [
+              "vvp",
+              "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_manifest/run-20261102T153159784083Z/tb_act4.vvp",
+              "+imem=/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_manifest/run-20261102T153159784083Z/00000_pass/image.rows.hex",
+              "+tohost=1000fff0",
+              "+max_cycles=200",
+              "+data_latency=2",
+              "+predict=1"
+            ],
+            "exit_code": 0,
+            "host_timeout": false,
+            "log": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_manifest/run-20261102T153159784083Z/00000_pass/simulation.log",
+            "log_sha256": "d48fddb5375150e6ea88629c76fd3cca7bec23a9f6f83df3b43bbbbee7b7c56c"
+          }
+        }
+      ],
+      "checks": {
+        "expected_process_exit": true,
+        "expected_inventory_counts": true,
+        "expected_provenance_label": true,
+        "exact_final_runner_hash": true,
+        "no_certification_claim": true,
+        "compile_succeeded": true,
+        "one_shared_compile": true,
+        "worker_count_matches": true,
+        "sorted_report_order": true,
+        "every_input_counted": true,
+        "per_case_logs_intact": true
+      },
+      "origin_report": "build/act4_suite_smoke_manifest/results.json",
+      "origin_report_sha256": "b2598621e55e1aeb92e02a50eb459debb674addc8603474ac7f801caa70f798e",
+      "synthetic_manifest_content": {
+        "upstream_revision": "synthetic-smoke-fixtures-not-upstream",
+        "config": {
+          "source": "locally encoded harness examples"
+        },
+        "elfs": {
+          "pass.elf": "90f857fe07a41c7abbb8d2b89b65aed01fa3e16c2c07ed73f6837ab23325c0ea"
+        }
+      }
+    },
+    {
+      "name": "bad_manifest",
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/scripts/run_act4_suite.py",
+        "--elf-dir",
+        "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_inputs/pass",
+        "--max-cycles",
+        "200",
+        "--data-latency",
+        "2",
+        "--predict",
+        "1",
+        "--wall-timeout",
+        "120",
+        "--output-dir",
+        "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_bad_manifest",
+        "--jobs",
+        "2",
+        "--manifest",
+        "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_inputs/pass/bad_manifest.json"
+      ],
+      "expected_exit_code": 1,
+      "exit_code": 1,
+      "expected_counts": {
+        "passed": 1,
+        "failed": 0,
+        "conversion_failed": 0,
+        "timeout": 0,
+        "total": 1
+      },
+      "counts": {
+        "passed": 1,
+        "failed": 0,
+        "conversion_failed": 0,
+        "timeout": 0,
+        "total": 1
+      },
+      "expected_provenance": "provenance_not_verified",
+      "provenance": {
+        "status": "provenance_not_verified",
+        "manifest": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_inputs/pass/bad_manifest.json",
+        "errors": [
+          {
+            "elf_hash_mismatches": [
+              "pass.elf"
+            ]
+          }
+        ],
+        "manifest_sha256": "e90ad75062d29548f8430079730e9a7061e627d1e1f0b77dcef45e1eb231afd2"
+      },
+      "status": "failed",
+      "configuration": {
+        "tohost": "0x1000fff0",
+        "max_cycles": 200,
+        "data_latency": 2,
+        "predict": 1,
+        "wall_timeout_seconds": 120.0,
+        "jobs": 2
+      },
+      "execution": {
+        "compile_invocations": 1,
+        "worker_model": "ThreadPoolExecutor",
+        "report_order": "sorted relative input filename"
+      },
+      "errors": [],
+      "compile": {
+        "command": [
+          "iverilog",
+          "-g2012",
+          "-s",
+          "tb_act4",
+          "-o",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_bad_manifest/run-20261102T153159991990Z/tb_act4.vvp",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_ooo_pkg.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_alu.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_axi_lite_master.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_branch_compare.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_branch_predictor.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_completion_arbiter.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_csr_file.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_decoder.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_execution_cluster.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_fetch.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_instruction_adapter.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_integer_execute.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_issue_queue.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_load_store_unit.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_machine_timer.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_muldiv_execute.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_ooo_axi_top.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_ooo_core.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_physical_regfile.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_recovery_controller.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_rename.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_reorder_buffer.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_trace_recorder.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_writeback.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/tb/tb_act4.sv"
+        ],
+        "exit_code": 0,
+        "host_timeout": false,
+        "log": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_bad_manifest/run-20261102T153159991990Z/compile.log",
+        "log_sha256": "8144e4db295dac5d6b8a7afae4a11905fadd001036da0a2668c59941b5badf73"
+      },
+      "cases": [
+        {
+          "name": "pass.elf",
+          "elf": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_inputs/pass/pass.elf",
+          "directory": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_bad_manifest/run-20261102T153159991990Z/00000_pass",
+          "status": "passed",
+          "stage": "simulation",
+          "elf_sha256": "90f857fe07a41c7abbb8d2b89b65aed01fa3e16c2c07ed73f6837ab23325c0ea",
+          "elf_bytes": 104,
+          "conversion": {
+            "command": [
+              "/opt/homebrew/opt/python@3.14/bin/python3.14",
+              "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/scripts/act4_elf_to_mem.py",
+              "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_inputs/pass/pass.elf",
+              "--words",
+              "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_bad_manifest/run-20261102T153159991990Z/00000_pass/image.words.hex",
+              "--rows",
+              "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_bad_manifest/run-20261102T153159991990Z/00000_pass/image.rows.hex",
+              "--report",
+              "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_bad_manifest/run-20261102T153159991990Z/00000_pass/load.json"
+            ],
+            "exit_code": 0,
+            "host_timeout": false,
+            "log": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_bad_manifest/run-20261102T153159991990Z/00000_pass/conversion.log",
+            "log_sha256": "801972ba5abf101660dd179bdfb6612bcf6d23531c2085b65ebc3e4301735a9b"
+          },
+          "load_report": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_bad_manifest/run-20261102T153159991990Z/00000_pass/load.json",
+          "rows_sha256": "713b0021f01263173f2a1eb0e48b2cf58e1fa10fd64599a814a65f4da6300126",
+          "summary": [
+            "ACT4_HARNESS PASS cycles=18 retired=4 traps=0 stores=1/1"
+          ],
+          "simulation": {
+            "command": [
+              "vvp",
+              "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_bad_manifest/run-20261102T153159991990Z/tb_act4.vvp",
+              "+imem=/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_bad_manifest/run-20261102T153159991990Z/00000_pass/image.rows.hex",
+              "+tohost=1000fff0",
+              "+max_cycles=200",
+              "+data_latency=2",
+              "+predict=1"
+            ],
+            "exit_code": 0,
+            "host_timeout": false,
+            "log": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_bad_manifest/run-20261102T153159991990Z/00000_pass/simulation.log",
+            "log_sha256": "d48fddb5375150e6ea88629c76fd3cca7bec23a9f6f83df3b43bbbbee7b7c56c"
+          }
+        }
+      ],
+      "checks": {
+        "expected_process_exit": true,
+        "expected_inventory_counts": true,
+        "expected_provenance_label": true,
+        "exact_final_runner_hash": true,
+        "no_certification_claim": true,
+        "compile_succeeded": true,
+        "one_shared_compile": true,
+        "worker_count_matches": true,
+        "sorted_report_order": true,
+        "every_input_counted": true,
+        "hash_mismatch_is_explicit": true,
+        "per_case_logs_intact": true
+      },
+      "origin_report": "build/act4_suite_smoke_bad_manifest/results.json",
+      "origin_report_sha256": "cf21085d064e5818ce16b5bb1b1ee6475c76b60875726ed02e73b5330dfd9360",
+      "synthetic_manifest_content": {
+        "upstream_revision": "synthetic-smoke-fixtures-not-upstream",
+        "config": {
+          "source": "locally encoded harness examples"
+        },
+        "elfs": {
+          "pass.elf": "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      }
+    },
+    {
+      "name": "empty",
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/scripts/run_act4_suite.py",
+        "--elf-dir",
+        "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_inputs/empty",
+        "--max-cycles",
+        "200",
+        "--data-latency",
+        "2",
+        "--predict",
+        "1",
+        "--wall-timeout",
+        "120",
+        "--output-dir",
+        "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_empty",
+        "--jobs",
+        "2"
+      ],
+      "expected_exit_code": 1,
+      "exit_code": 1,
+      "expected_counts": {
+        "passed": 0,
+        "failed": 0,
+        "conversion_failed": 0,
+        "timeout": 0,
+        "total": 0
+      },
+      "counts": {
+        "passed": 0,
+        "failed": 0,
+        "conversion_failed": 0,
+        "timeout": 0,
+        "total": 0
+      },
+      "expected_provenance": "provenance_not_verified",
+      "provenance": {
+        "status": "provenance_not_verified",
+        "manifest": null,
+        "errors": [],
+        "reason": "No build manifest supplied; ELF origin is not verified."
+      },
+      "status": "failed",
+      "configuration": {
+        "tohost": "0x1000fff0",
+        "max_cycles": 200,
+        "data_latency": 2,
+        "predict": 1,
+        "wall_timeout_seconds": 120.0,
+        "jobs": 2
+      },
+      "execution": {
+        "compile_invocations": 1,
+        "worker_model": "ThreadPoolExecutor",
+        "report_order": "sorted relative input filename"
+      },
+      "errors": [
+        "No .elf files found; an empty suite cannot pass"
+      ],
+      "compile": {
+        "command": [
+          "iverilog",
+          "-g2012",
+          "-s",
+          "tb_act4",
+          "-o",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_empty/run-20261102T153200184921Z/tb_act4.vvp",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_ooo_pkg.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_alu.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_axi_lite_master.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_branch_compare.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_branch_predictor.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_completion_arbiter.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_csr_file.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_decoder.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_execution_cluster.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_fetch.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_instruction_adapter.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_integer_execute.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_issue_queue.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_load_store_unit.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_machine_timer.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_muldiv_execute.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_ooo_axi_top.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_ooo_core.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_physical_regfile.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_recovery_controller.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_rename.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_reorder_buffer.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_trace_recorder.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/rtl/rv32_writeback.sv",
+          "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/tb/tb_act4.sv"
+        ],
+        "exit_code": 0,
+        "host_timeout": false,
+        "log": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_empty/run-20261102T153200184921Z/compile.log",
+        "log_sha256": "8144e4db295dac5d6b8a7afae4a11905fadd001036da0a2668c59941b5badf73"
+      },
+      "cases": [],
+      "checks": {
+        "expected_process_exit": true,
+        "expected_inventory_counts": true,
+        "expected_provenance_label": true,
+        "exact_final_runner_hash": true,
+        "no_certification_claim": true,
+        "compile_succeeded": true,
+        "one_shared_compile": true,
+        "worker_count_matches": true,
+        "sorted_report_order": true,
+        "every_input_counted": true,
+        "empty_suite_error_is_explicit": true,
+        "per_case_logs_intact": true
+      },
+      "origin_report": "build/act4_suite_smoke_empty/results.json",
+      "origin_report_sha256": "2b4a82e520051f7de5f219679626bd27432bad640dae21f314b1153682bb59b9"
+    }
+  ],
+  "cli_validation": [
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/scripts/run_act4_suite.py",
+        "--elf-dir",
+        "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_inputs/pass",
+        "--jobs",
+        "0"
+      ],
+      "expected_exit_code": 2,
+      "exit_code": 2,
+      "matched_expectation": true,
+      "output_sha256": "25601368a3c839635c76c56b44a2a86c731f83b4ea245094b44b96ff14cbc35f"
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/scripts/run_act4_suite.py",
+        "--elf-dir",
+        "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_suite_smoke_inputs/pass",
+        "--jobs",
+        "33"
+      ],
+      "expected_exit_code": 2,
+      "exit_code": 2,
+      "matched_expectation": true,
+      "output_sha256": "25601368a3c839635c76c56b44a2a86c731f83b4ea245094b44b96ff14cbc35f"
+    }
+  ],
+  "infrastructure_expectations": 49,
+  "expectation_failures": 0,
+  "consolidated_log": "reports/act4_suite_infrastructure.log",
+  "consolidated_log_sha256": "2c64983d61a036c3b7f390168e1d06199e778d4bbf4f53dcb5e40e19eed4280a",
+  "retention": "Full conversion and simulation logs, including intentional failures, are embedded in the consolidated log. Successful compile logs are summarized by command, exit code and SHA256. Original build paths are historical metadata."
+}

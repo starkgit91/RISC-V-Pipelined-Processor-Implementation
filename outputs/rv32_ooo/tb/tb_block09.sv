@@ -491,6 +491,42 @@ module tb_block09;
     check(occupancy == 3 && fault_pending,
           "a misaligned predicted successor queues its fault behind both preceding instructions");
 
+    // A younger predicted-PC fault must not pass an older delayed instruction response.
+    reset_dut; predict_enable = 1; prediction_mode = 1; prediction_anchor = 4;
+    prediction_target = 2; fetch_ready = 0; release_response = 0; cycle;
+    for (n = 0; n < 5; n = n + 1) begin
+      cycle;
+      check(!fault_pending && occupancy == 0 && memory_pending && !request_valid,
+            "delayed older read keeps its younger local fault out of the visible queue");
+    end
+    release_response = 1; cycle;
+    check(occupancy == 3 && fetched.lane0.pc == 0 && fetched.lane1.pc == 4
+          && !fetched.lane0.exception.valid && !fetched.lane1.exception.valid,
+          "delayed successful pair precedes the predicted-successor fault");
+    fetch_ready = 3; cycle;
+    check(fetch_valid == 1 && fetched.lane0.pc == 2
+          && fetched.lane0.exception.cause == CAUSE_INSTR_MISALIGNED,
+          "the younger alignment fault becomes oldest only after the successful pair leaves");
+    cycle;
+
+    // An older access fault suppresses a younger local fault at the predicted next PC.
+    reset_dut; predict_enable = 1; prediction_mode = 1; prediction_anchor = 4;
+    prediction_target = 2; fetch_ready = 0; release_response = 0; next_error = 1; cycle;
+    next_error = 0;
+    for (n = 0; n < 3; n = n + 1) begin
+      cycle;
+      check(!fault_pending && occupancy == 0, "no younger fault bypasses the delayed access");
+    end
+    release_response = 1; cycle;
+    check(occupancy == 1 && fetch_valid == 1 && fetched.lane0.pc == 0
+          && fetched.lane0.exception.cause == CAUSE_INSTR_ACCESS
+          && fetched.lane0.exception.tval == 0,
+          "returning access fault wins over the misaligned predicted successor");
+    fetch_ready = 3;
+    for (n = 0; n < 4; n = n + 1) cycle;
+    check(fault_pending && occupancy == 0 && !request_valid,
+          "one older access-fault token halts fetch without adding a second local fault");
+
     // Illegal ready prefix and unowned response are diagnostic-only protocol violations.
     reset_dut; fetch_ready = 0;
     for (n = 0; n < 5; n = n + 1) cycle;

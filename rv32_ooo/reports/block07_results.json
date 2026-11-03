@@ -1,0 +1,46 @@
+{
+  "block": 7,
+  "status": "passed",
+  "architecture_target": "two_issue_RV32IM_Zicsr_Zifencei",
+  "scope": "integer/control/address execution, iterative RV32M, retained results, cancellation",
+  "checks": 121718,
+  "failures": 0,
+  "cases": [
+    {
+      "top": "tb_block07",
+      "scope": "integer/control/address execution, iterative RV32M, retained results, cancellation",
+      "checks": 121060,
+      "failures": 0
+    },
+    {
+      "top": "tb_block07_integration",
+      "scope": "actual OoO arithmetic with connected rename/ROB/PRF/IQ/execution/trace",
+      "checks": 658,
+      "failures": 0
+    }
+  ],
+  "simulator": "Icarus Verilog version 13.0 (stable) (v13_0)",
+  "sources_sha256": {
+    "rtl/rv32_alu.sv": "ede6c6ba45722ab58a791ce606bf959ab619fcb8958abd68e5968a3321901c27",
+    "rtl/rv32_branch_compare.sv": "00c8c76aa56fc66a3b6b358219a5eb5aebd61f146ff758b4846e0a0f06ae1f9d",
+    "rtl/rv32_execution_cluster.sv": "f0ed98e0d53bde647ec81fc17b5747c43b50cce7402e3de9788a043bbd835523",
+    "rtl/rv32_integer_execute.sv": "de3e602097f5ae2afecc42b27d833bba7267d27ae9cf612aecaf2814a6fd3fcf",
+    "rtl/rv32_issue_queue.sv": "4de94e7ce32c9e1939e03202031874facfc5b770ee2c84a72d3e1c9bb765b29d",
+    "rtl/rv32_muldiv_execute.sv": "5c8380a195242cd78f8172792ee04c0e67fd744b42836ba7733a3455d19a9e14",
+    "rtl/rv32_ooo_pkg.sv": "d152eb7a58413148ed38bede06612267a76491d260e33a40cc6077732ce8860c",
+    "rtl/rv32_physical_regfile.sv": "161392e71a66f32e250b768c71e004e1001d917ef18647b72453144b0c23c033",
+    "rtl/rv32_rename.sv": "f0d133b2ac2be3c73cfd37a6e21b6add4f7cf23728d8e1638217a8da4668f107",
+    "rtl/rv32_reorder_buffer.sv": "ad2f5c007f5c00b5c7e4836eed5e86c7dc9d25117ed9eda60d91ac7f3ea80726",
+    "rtl/rv32_trace_recorder.sv": "1cd5551b346a2b6b8fed9412d3312c8ca908d3f9aa69fb020014f8bd740c3af2",
+    "tb/tb_block07.sv": "fe34bf9d852469e0a0cd860b89c7edac70524148e836e6369f3c725c0fcc01a7",
+    "tb/tb_block07_integration.sv": "753f8f3478eb311053ad44f300b7f404efd8947e8c08ef9f527d64b2543d14a8"
+  },
+  "not_verified": [
+    "production completion arbitration",
+    "complete recovery controller",
+    "memory transactions or CSR execution",
+    "fetch or prediction lookup/training",
+    "tests outside each case scope; official architectural certification",
+    "Vivado synthesis, implementation, or bitstream generation"
+  ]
+}

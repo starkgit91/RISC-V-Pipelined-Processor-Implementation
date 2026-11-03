@@ -1,0 +1,20 @@
+{
+  "entry": 0,
+  "ram_bytes": 65536,
+  "segments": [
+    {
+      "start": 0,
+      "end": 48704,
+      "file_bytes": 48704,
+      "zero_fill_bytes": 0,
+      "executable": true
+    }
+  ],
+  "status": "converted_not_executed",
+  "source": "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/verification/act4/elfs/rv32i/M/M-remu-02.elf",
+  "elf_sha256": "d70e19ea91d45c6056a5dc64dc1ab6a79246055acd592de2e2d604fef3ef76d0",
+  "outputs": {
+    "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_final_execution/run-20261103T072205424406Z/00126_M-remu-02/image.words.hex": "7ef947ec8f26ccebe42062fdb24a4ab9104464cbd92ab9ecd3c6f6d60adb6152",
+    "/Users/prashant/Documents/Codex/2026-11-01/is-x20/outputs/rv32_ooo/build/act4_final_execution/run-20261103T072205424406Z/00126_M-remu-02/image.rows.hex": "5240b759aa296e9342dffc6cc42e4549653dc9e0d39754ef70efc4c8484bdfad"
+  }
+}

@@ -15,13 +15,13 @@
   ],
   "simulator": "Icarus Verilog version 13.0 (stable) (v13_0)",
   "sources_sha256": {
-    "rtl/rv32_ooo_pkg.sv": "601cd92ff07046485c0499e6626330eb44384c37e9b0310c081d5f498ebc2f43",
+    "rtl/rv32_ooo_pkg.sv": "d152eb7a58413148ed38bede06612267a76491d260e33a40cc6077732ce8860c",
     "tb/tb_block01.sv": "36357daf24bd0cb9ee52bd67abd78a344f8a69da450c73ce741dd14e2319d583"
   },
   "not_verified": [
     "instruction decoding or execution",
     "renaming or scheduling",
-    "complete processor, AXI, interrupts, or firmware",
+    "tests outside each case scope; official architectural certification",
     "Vivado synthesis, implementation, or bitstream generation"
   ]
 }

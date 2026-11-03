@@ -27,6 +27,10 @@ valid/ready signals indicate when a record is meaningful and when it transfers.
 
 ## 2. Configuration and hardware dimensions
 
+The IF interface now includes a 64-bit fetch_row_t, a three-bit fetch_count_t for the four-entry
+instruction buffer, and paired prediction records. Shared RAM contains 8,192 64-bit instruction
+rows; the native row address is 13 bits. These types are implemented/tested in block 9.
+
 Five held completion sources (two integer, multiply/divide, later memory, later system) now
 share two registered writeback slots. Their packed completion_sources_t bundle uses independent
 valid/ready bits and does not change dispatch/retirement width.
